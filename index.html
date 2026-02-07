@@ -735,6 +735,8 @@ footer {
   backdrop-filter: blur(8px);
   align-items: center;
   justify-content: center;
+  flex-direction: column;
+  gap: 1rem;
   cursor: zoom-out;
 }
 
@@ -742,9 +744,25 @@ footer {
 
 .lightbox img {
   max-width: 90vw;
-  max-height: 90vh;
+  max-height: 80vh;
   border-radius: 12px;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox-caption {
+  display: none;
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0.5rem 1.25rem;
+  background: rgba(19, 19, 28, 0.8);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  pointer-events: none;
+}
+.lightbox-caption strong {
+  color: var(--accent);
 }
 
 .app-screenshots img {
@@ -754,7 +772,7 @@ footer {
 /* ---- CHAT WIDGET ---- */
 .chat-bubble {
   position: fixed;
-  bottom: 2rem;
+  bottom: 6rem;
   right: 2rem;
   width: 56px;
   height: 56px;
@@ -782,7 +800,7 @@ footer {
 .chat-panel {
   display: none;
   position: fixed;
-  bottom: 2rem;
+  bottom: 6rem;
   right: 2rem;
   width: 400px;
   height: 520px;
@@ -927,7 +945,7 @@ footer {
     bottom: 0.75rem;
     right: 0.75rem;
   }
-  .chat-bubble { bottom: 1.25rem; right: 1.25rem; }
+  .chat-bubble { bottom: 5rem; right: 1.25rem; }
 }
 </style>
 </head>
@@ -1228,6 +1246,7 @@ footer {
 <!-- LIGHTBOX -->
 <div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged image">
   <img id="lightbox-img" src="" alt="">
+  <div class="lightbox-caption" id="lightbox-caption"></div>
 </div>
 
 <!-- CHAT WIDGET -->
@@ -1287,21 +1306,25 @@ footer {
   // Lightbox
   var lb = document.getElementById('lightbox');
   var lbImg = document.getElementById('lightbox-img');
+  var lbCaption = document.getElementById('lightbox-caption');
 
   document.querySelectorAll('.app-screenshots img').forEach(function(img) {
     img.addEventListener('click', function() {
       lbImg.src = this.src;
       lbImg.alt = this.alt;
+      lbCaption.style.display = 'none';
       lb.classList.add('active');
     });
   });
 
   lb.addEventListener('click', function() { lb.classList.remove('active'); });
 
-  // Mascot peek -> lightbox
+  // Mascot peek -> lightbox with caption
   peekBtn.addEventListener('click', function() {
     lbImg.src = picked;
     lbImg.alt = 'ScrappyLabs mascot — Scrappy the stitchpunk dog';
+    lbCaption.innerHTML = '<strong>Scrappy</strong> — limited edition stuffed animal coming soon';
+    lbCaption.style.display = 'block';
     lb.classList.add('active');
   });
 
