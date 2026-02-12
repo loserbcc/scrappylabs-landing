@@ -1169,7 +1169,7 @@ footer {
           TestFlight Beta
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
-        <a href="https://github.com/loserbcc/openclaw-gateway" class="project-link" target="_blank" style="color: var(--text-muted);">
+        <a href="https://github.com/scrappylabsai/shellphone" class="project-link" target="_blank" style="color: var(--text-muted);">
           Gateway &mdash; GitHub
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </a>
@@ -1178,12 +1178,36 @@ footer {
     <div class="project-card">
       <div class="project-status status-live">
         <span class="dot" style="width:5px;height:5px;border-radius:50%;background:var(--green);"></span>
+        Open Source
+      </div>
+      <h3>ShellCast</h3>
+      <p>Push audio from any headless server to your iPhone over WebSocket. TTS, music gen, podcasts &mdash; if a server generates audio and you can't hear it, ShellCast relays it. 111-line Node.js relay + native iOS client.</p>
+      <a href="https://github.com/scrappylabsai/shellcast" class="project-link" target="_blank">
+        GitHub
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="project-card">
+      <div class="project-status status-live">
+        <span class="dot" style="width:5px;height:5px;border-radius:50%;background:var(--green);"></span>
         Live
       </div>
-      <h3>QB Agent</h3>
+      <h3>QBO Agent</h3>
       <p>AI bookkeeper that plugs directly into QuickBooks Online. Create invoices, track expenses, generate P&amp;L reports, manage purchase orders &mdash; all in plain English. Your books, handled.</p>
       <a href="/qb-agent" class="project-link">
         Learn More
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="project-card">
+      <div class="project-status status-beta">
+        <span class="dot" style="width:5px;height:5px;border-radius:50%;background:var(--cyan);"></span>
+        In Dev
+      </div>
+      <h3>WatchThem.ai</h3>
+      <p>Competitor intelligence platform. AI monitors websites, pricing, emails, ads, social, and SEO &mdash; then tells you what to do about it. Enterprise CI at startup prices.</p>
+      <a href="https://pitch.watchthem.ai" class="project-link" target="_blank">
+        See the Pitch
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -1243,7 +1267,7 @@ footer {
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
       brian@scrappylabs.ai
     </a>
-    <a href="https://github.com/loserbcc" class="contact-chip" target="_blank">
+    <a href="https://github.com/scrappylabsai" class="contact-chip" target="_blank">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
       GitHub
     </a>
@@ -1261,7 +1285,7 @@ footer {
     <div class="footer-links">
       <a href="https://tts.scrappylabs.ai">TTS</a>
       <a href="https://beta.scrappylabs.ai">Beta</a>
-      <a href="https://github.com/loserbcc">GitHub</a>
+      <a href="https://github.com/scrappylabsai">GitHub</a>
       <a href="mailto:brian@scrappylabs.ai">Contact</a>
       <a href="/privacy">Privacy</a>
     </div>
@@ -1363,7 +1387,7 @@ footer {
   var typingEl = document.getElementById('chat-typing');
   var sending = false;
 
-  var SYSTEM_PROMPT = "You are the ScrappyLabs AI assistant on scrappylabs.ai. You represent ScrappyLabs, founded by Brian — an OG internet builder with 35+ years of experience spanning software, AI/ML, robotics, hardware, CNC fabrication, infrastructure, and construction consulting.\n\nLive projects:\n- **Poo Bear** — iOS app (App Store). AI-powered bedtime story companion with voice cloning, multi-character story generation, and BLE toy connectivity. Clone your voice in 10 seconds.\n- **ScrappyLabs TTS** (tts.scrappylabs.ai) — Voice AI platform with 50+ voices. Text-to-speech, voice cloning, voice design from text descriptions, and a production studio. Runs on local GPU infrastructure.\n- **ShellPhone** (TestFlight beta) — Privacy-first open-source iOS client for self-hosted AI bots. No middleman, no data collection. Gateway on GitHub.\n- **ScrappyLabs API** (api.scrappylabs.ai) — REST API for TTS, voice cloning, voice design, speech-to-text, and LLM chat. Free tier available.\n- **QB Agent** (live, private deployment) — AI bookkeeper that integrates directly with QuickBooks Online. Invoicing, expenses, purchase orders, financial reports — all through plain English conversation. Secure OAuth 2.0 connection, human-approval on every write. Currently in private deployment for select businesses. Learn more at /qb-agent.\n- **Spymaster** (in development) — DIY RV monitoring iOS app that replaces a $200+ Waggle sensor for $0 hardware cost. Uses a repurposed Pixel phone with cellular connectivity, dual cameras, GPS, temperature alerts, OBD2 vehicle diagnostics, SMS reports, and full Tailscale SSH access.\n\nServices offered: AI/ML (model training, fine-tuning, inference, edge AI), Infrastructure & DevOps (bare-metal, GPU clusters, Tailscale, Cloudflare), Software Development (full-stack, APIs, real-time, embedded), Robotics & Hardware (sensors, motor control, PCB, 3D printing), CNC & Fabrication (machining, laser cutting, prototyping), Construction Consulting (structural, planning, renovation).\n\nPhilosophy: Ship first, own the stack, no gatekeeping. Local GPUs over cloud lock-in.\n\nContact: brian@scrappylabs.ai\n\nRules:\n- Be friendly, direct, and concise — no corporate fluff.\n- Keep answers short (2-4 sentences) unless asked for detail.\n- For in-depth project discussions or consulting inquiries, suggest reaching out to brian@scrappylabs.ai.\n- You can link to tts.scrappylabs.ai, the App Store listing, or the GitHub.\n- Do not make up features or capabilities that aren't listed above.";
+  var SYSTEM_PROMPT = "You are the ScrappyLabs AI assistant on scrappylabs.ai. You represent ScrappyLabs, founded by Brian — an OG internet builder with 35+ years of experience spanning software, AI/ML, robotics, hardware, CNC fabrication, infrastructure, and construction consulting.\n\nLive projects:\n- **Poo Bear** — iOS app (App Store). AI-powered bedtime story companion with voice cloning, multi-character story generation, and BLE toy connectivity. Clone your voice in 10 seconds.\n- **ScrappyLabs TTS** (tts.scrappylabs.ai) — Voice AI platform with 50+ voices. Text-to-speech, voice cloning, voice design from text descriptions, and a production studio. Runs on local GPU infrastructure.\n- **ShellPhone** (TestFlight beta) — Privacy-first open-source iOS client for self-hosted AI bots. No middleman, no data collection. Gateway on GitHub.\n- **ShellCast** (open source, github.com/scrappylabsai/shellcast) — Push audio from any headless server to your iPhone over WebSocket. Lightweight Node.js relay + native iOS client. Use for TTS playback, AI music generation, podcast monitoring, or any headless audio.\n- **ScrappyLabs API** (api.scrappylabs.ai) — REST API for TTS, voice cloning, voice design, speech-to-text, and LLM chat. Free tier available.\n- **QB Agent** (live, private deployment) — AI bookkeeper that integrates directly with QuickBooks Online. Invoicing, expenses, purchase orders, financial reports — all through plain English conversation. Secure OAuth 2.0 connection, human-approval on every write. Currently in private deployment for select businesses. Learn more at /qb-agent.\n- **Spymaster** (in development) — DIY RV monitoring iOS app that replaces a $200+ Waggle sensor for $0 hardware cost. Uses a repurposed Pixel phone with cellular connectivity, dual cameras, GPS, temperature alerts, OBD2 vehicle diagnostics, SMS reports, and full Tailscale SSH access.\n\nServices offered: AI/ML (model training, fine-tuning, inference, edge AI), Infrastructure & DevOps (bare-metal, GPU clusters, Tailscale, Cloudflare), Software Development (full-stack, APIs, real-time, embedded), Robotics & Hardware (sensors, motor control, PCB, 3D printing), CNC & Fabrication (machining, laser cutting, prototyping), Construction Consulting (structural, planning, renovation).\n\nPhilosophy: Ship first, own the stack, no gatekeeping. Local GPUs over cloud lock-in.\n\nContact: brian@scrappylabs.ai\n\nRules:\n- Be friendly, direct, and concise — no corporate fluff.\n- Keep answers short (2-4 sentences) unless asked for detail.\n- For in-depth project discussions or consulting inquiries, suggest reaching out to brian@scrappylabs.ai.\n- You can link to tts.scrappylabs.ai, the App Store listing, or the GitHub.\n- Do not make up features or capabilities that aren't listed above.";
 
   var history = [{ role: 'system', content: SYSTEM_PROMPT }];
 
