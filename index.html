@@ -595,6 +595,144 @@ section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
 }
 .contact-chip:hover { border-color: var(--accent); color: var(--text); background: var(--surface-2); }
 
+/* ---- COMMUNITY / TIER CARDS ---- */
+.community-section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
+.tier-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.tier-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 2rem;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.tier-card:hover {
+  border-color: var(--border-hover);
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+}
+.tier-card.tier-featured {
+  border-color: transparent;
+  background: linear-gradient(var(--surface), var(--surface)) padding-box,
+              linear-gradient(135deg, var(--accent), var(--cyan)) border-box;
+  border: 2px solid transparent;
+}
+.tier-card.tier-featured::before {
+  content: 'Recommended';
+  position: absolute;
+  top: 1rem;
+  right: -2rem;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  color: var(--bg);
+  font-family: var(--mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: 0.25rem 2.5rem;
+  transform: rotate(35deg);
+}
+.tier-card.tier-featured:hover {
+  box-shadow: 0 12px 40px var(--accent-glow), 0 0 30px var(--cyan-glow);
+}
+.tier-price {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: 900;
+  letter-spacing: -1px;
+  line-height: 1.1;
+  margin-bottom: 0.25rem;
+}
+.tier-price span {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0;
+}
+.tier-name {
+  font-size: 1.15rem;
+  font-weight: 800;
+  letter-spacing: -0.3px;
+  margin-bottom: 1rem;
+}
+.tier-card.tier-featured .tier-name {
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.tier-perks {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  flex: 1;
+}
+.tier-perks li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 0.6rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  line-height: 1.5;
+}
+.tier-perks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.tier-card.tier-featured .tier-perks li::before {
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+}
+.btn-tier {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.85rem;
+  letter-spacing: 0.3px;
+  transition: all 0.25s;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+  text-align: center;
+  width: 100%;
+  background: var(--surface-2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-tier:hover {
+  border-color: var(--accent);
+  color: var(--text);
+  background: var(--surface);
+  transform: translateY(-2px);
+}
+.tier-card.tier-featured .btn-tier {
+  background: var(--accent);
+  color: var(--bg);
+  border-color: transparent;
+}
+.tier-card.tier-featured .btn-tier:hover {
+  background: var(--accent-hover);
+  box-shadow: 0 8px 30px var(--accent-glow);
+}
+@media (max-width: 768px) {
+  .tier-grid { grid-template-columns: 1fr; }
+}
+
 /* ---- FOOTER ---- */
 footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center; }
 .footer-inner {
@@ -757,7 +895,8 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     <a href="#work" class="nav-link">Work</a>
     <a href="#products" class="nav-link">Products</a>
     <a href="#research" class="nav-link">Research</a>
-    <a href="#contact" class="nav-cta">Let's Talk</a>
+    <a href="#community" class="nav-link">Community</a>
+    <a href="https://www.patreon.com/cw/brianjack" class="nav-cta" target="_blank">Join the Lab</a>
     <button class="mobile-menu" onclick="document.querySelector('nav').classList.toggle('open')" aria-label="Menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
     </button>
@@ -780,9 +919,9 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     talk to customers, and solve problems while you sleep.
     Built on real hardware. Shipping right now.
   </p>
-  <p class="hero-origin">// brian@scrappylabs.ai &mdash; 35+ years building at the edge</p>
+  <p class="hero-origin">// <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87e5f5eee6e9c7f4e4f5e6f7f7feebe6e5f4a9e6ee">[email&#160;protected]</a> &mdash; 35+ years building at the edge</p>
   <div class="hero-actions">
-    <a href="#contact" class="btn btn-primary">Start a Conversation</a>
+    <a href="https://www.patreon.com/cw/brianjack" class="btn btn-primary" target="_blank">Join the Lab</a>
     <a href="#work" class="btn btn-secondary">See What's Running</a>
   </div>
 </section>
@@ -1239,22 +1378,70 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
   </div>
 </section>
 
+<!-- COMMUNITY -->
+<section id="community" class="community-section">
+  <span class="section-label">// Join the Lab</span>
+  <h2 class="section-title">Build with us.</h2>
+  <p class="section-desc">
+    Not just a newsletter. Get early access to every tool we ship, vote on what gets built next,
+    and get direct access to 35 years of building experience.
+  </p>
+  <div class="tier-grid">
+
+    <div class="tier-card">
+      <div class="tier-price">$5<span>/mo</span></div>
+      <div class="tier-name">Scrappy Supporter</div>
+      <ul class="tier-perks">
+        <li>Early access to builds</li>
+        <li>Behind-the-scenes dev logs</li>
+        <li>Patron-only Discord channel</li>
+      </ul>
+      <a href="https://www.patreon.com/cw/brianjack" class="btn-tier" target="_blank">Get Early Access</a>
+    </div>
+
+    <div class="tier-card tier-featured">
+      <div class="tier-price">$15<span>/mo</span></div>
+      <div class="tier-name">Fleet Member</div>
+      <ul class="tier-perks">
+        <li>Everything in Supporter</li>
+        <li>Vote on what we build next</li>
+        <li>Monthly live build sessions</li>
+        <li>Name in credits</li>
+      </ul>
+      <a href="https://www.patreon.com/cw/brianjack" class="btn-tier" target="_blank">Join the Fleet</a>
+    </div>
+
+    <div class="tier-card">
+      <div class="tier-price">$50<span>/mo</span></div>
+      <div class="tier-name">Lab Partner</div>
+      <ul class="tier-perks">
+        <li>Everything in Fleet Member</li>
+        <li>Direct access to Brian</li>
+        <li>Priority feature requests</li>
+        <li>Early hardware prototypes</li>
+      </ul>
+      <a href="https://www.patreon.com/cw/brianjack" class="btn-tier" target="_blank">Partner Up</a>
+    </div>
+
+  </div>
+</section>
+
 <!-- CONTACT -->
 <section id="contact" class="cta-section">
   <span class="section-label">// Let's Build Something</span>
-  <h2 class="section-title">Got a problem? Let's solve it.</h2>
+  <h2 class="section-title">Let's connect.</h2>
   <p class="section-desc">
-    Whether it's a quick consult or a full build, start with a conversation.
-    No sales pitch, no NDAs to sign first. Just tell us what you need.
+    Whether it's a quick consult, a full build, or you just want to follow along &mdash;
+    pick your channel. Join the community or reach out directly. No sales pitch, no NDAs.
   </p>
   <div class="contact-links">
     <a href="tel:+18282815666" class="contact-chip">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
       (828) 281-5666
     </a>
-    <a href="mailto:brian@scrappylabs.ai" class="contact-chip">
+    <a href="/cdn-cgi/l/email-protection#bcdeced5ddd2fccfdfceddccccc5d0dddecf92ddd5" class="contact-chip">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
-      brian@scrappylabs.ai
+      <span class="__cf_email__" data-cfemail="eb8999828a85ab9888998a9b9b92878a8998c58a82">[email&#160;protected]</span>
     </a>
     <a href="https://github.com/scrappylabsai" class="contact-chip" target="_blank">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
@@ -1263,6 +1450,10 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     <a href="https://discord.gg/ekRv2zJCHT" class="contact-chip" target="_blank">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 00-4.885-1.515.074.074 0 00-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 00-5.487 0 12.64 12.64 0 00-.617-1.25.077.077 0 00-.079-.037A19.736 19.736 0 003.677 4.37a.07.07 0 00-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 00.031.057 19.9 19.9 0 005.993 3.03.078.078 0 00.084-.028c.462-.63.874-1.295 1.226-1.994a.076.076 0 00-.041-.106 13.107 13.107 0 01-1.872-.892.077.077 0 01-.008-.128 10.2 10.2 0 00.372-.292.074.074 0 01.077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 01.078.01c.12.098.246.198.373.292a.077.077 0 01-.006.127 12.299 12.299 0 01-1.873.892.077.077 0 00-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 00.084.028 19.839 19.839 0 006.002-3.03.077.077 0 00.032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 00-.031-.03z"/></svg>
       Discord
+    </a>
+    <a href="https://www.patreon.com/cw/brianjack" class="contact-chip" target="_blank">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M15.386.524c-4.764 0-8.64 3.876-8.64 8.64 0 4.75 3.876 8.613 8.64 8.613 4.75 0 8.614-3.864 8.614-8.613C24 4.4 20.136.524 15.386.524zM.003 23.537h4.22V.524H.003z"/></svg>
+      Patreon
     </a>
     <a href="https://tts.scrappylabs.ai" class="contact-chip" target="_blank">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14"/></svg>
@@ -1280,7 +1471,8 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
       <a href="https://loser.com">Playground</a>
       <a href="https://github.com/scrappylabsai">GitHub</a>
       <a href="https://discord.gg/ekRv2zJCHT">Discord</a>
-      <a href="mailto:brian@scrappylabs.ai">Contact</a>
+      <a href="https://www.patreon.com/cw/brianjack">Community</a>
+      <a href="/cdn-cgi/l/email-protection#86e4f4efe7e8c6f5e5f4e7f6f6ffeae7e4f5a8e7ef">Contact</a>
       <a href="/privacy">Privacy</a>
       <a href="/tos">Terms</a>
     </div>
@@ -1321,7 +1513,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
   </div>
 </div>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 (function() {
   // ---- Hero Background ----
   var heroBgs = [
