@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SPECVOICE — Speculative Execution at the Dialog Layer</title>
+<meta name="description" content="A bubble-gum-thinking prototype: generalizing token-level speculative decoding to whole utterance chunks for voice agents. 6.2× faster mouth-to-mouth, 16× less jitter, audible A/B demo.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --font-display: 'Instrument Serif', Georgia, serif;
+    --font-body: 'DM Sans', system-ui, sans-serif;
+    --font-mono: 'JetBrains Mono', 'SF Mono', Consolas, monospace;
+
+    --bg: #0c111b;
+    --surface: #131a2b;
+    --surface2: #1a2238;
+    --surface-elevated: #1e2a45;
+    --border: rgba(255, 255, 255, 0.06);
+    --border-bright: rgba(255, 255, 255, 0.12);
+    --text: #dce4f0;
+    --text-dim: #7889a6;
+    --text-bright: #f0f4fa;
+
+    --blue: #1e3a5f;
+    --blue-bright: #2d5a8e;
+    --blue-dim: rgba(30, 58, 95, 0.25);
+    --gold: #d4a73a;
+    --gold-dim: rgba(212, 167, 58, 0.12);
+    --gold-bright: #e8c05a;
+    --green: #3a9e6e;
+    --green-dim: rgba(58, 158, 110, 0.12);
+    --pink: #e07a5f;
+    --pink-dim: rgba(224, 122, 95, 0.14);
+  }
+
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #f6f4f0;
+      --surface: #ffffff;
+      --surface2: #f0ece6;
+      --surface-elevated: #ffffff;
+      --border: rgba(0, 0, 0, 0.07);
+      --border-bright: rgba(0, 0, 0, 0.14);
+      --text: #1a1e2e;
+      --text-dim: #5a6478;
+      --text-bright: #0c111b;
+      --blue: #1e3a5f;
+      --blue-bright: #1e3a5f;
+      --blue-dim: rgba(30, 58, 95, 0.08);
+      --gold: #92710a;
+      --gold-dim: rgba(146, 113, 10, 0.08);
+      --gold-bright: #7a5f08;
+      --green: #1a7a4e;
+      --green-dim: rgba(26, 122, 78, 0.08);
+      --pink: #b04a2a;
+      --pink-dim: rgba(176, 74, 42, 0.10);
+    }
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at 30% 0%, var(--blue-dim) 0%, transparent 50%),
+      radial-gradient(ellipse at 70% 100%, var(--pink-dim) 0%, transparent 40%);
+    color: var(--text);
+    font-family: var(--font-body);
+    line-height: 1.7;
+    min-height: 100vh;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(18px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .anim { animation: fadeUp 0.5s ease-out both; animation-delay: calc(var(--i, 0) * 0.06s); }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-delay: 0ms !important; }
+  }
+
+  .container { max-width: 780px; margin: 0 auto; padding: 60px 24px 80px; }
+
+  /* Back link */
+  .backlink {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--text-dim); text-decoration: none;
+    font-family: var(--font-mono); font-size: 12px;
+    margin-bottom: 36px; padding: 6px 12px;
+    border: 1px solid var(--border); border-radius: 6px;
+    transition: all 0.15s ease;
+  }
+  .backlink:hover { color: var(--text); border-color: var(--border-bright); }
+
+  /* Bubble-gum tag */
+  .tag-bubble {
+    display: inline-block;
+    background: var(--pink-dim);
+    color: var(--pink);
+    font-family: var(--font-mono);
+    font-size: 11px; font-weight: 600;
+    padding: 4px 10px; border-radius: 999px;
+    text-transform: uppercase; letter-spacing: 0.7px;
+    margin-bottom: 16px;
+  }
+
+  /* Hero */
+  .hero { margin-bottom: 40px; }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(32px, 5vw, 48px);
+    font-weight: 400; line-height: 1.15;
+    color: var(--text-bright);
+    margin-bottom: 12px; letter-spacing: -0.5px;
+  }
+  .hero h1 em { color: var(--gold); font-style: italic; }
+  .hero-meta {
+    font-family: var(--font-mono); font-size: 12px;
+    color: var(--text-dim);
+    display: flex; gap: 20px; flex-wrap: wrap;
+    margin-bottom: 28px;
+  }
+  .hero-meta a { color: var(--gold); text-decoration: none; }
+  .hero-meta a:hover { text-decoration: underline; }
+  .lead {
+    font-size: 18px; line-height: 1.65;
+    color: var(--text); margin-bottom: 40px;
+    max-width: 640px;
+  }
+  .lead strong { color: var(--text-bright); }
+
+  /* Headings */
+  h2 {
+    font-family: var(--font-display);
+    font-size: 28px; font-weight: 400;
+    color: var(--text-bright);
+    margin: 48px 0 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+  h2 .num {
+    font-family: var(--font-mono); font-size: 13px; font-weight: 600;
+    color: var(--gold); margin-right: 10px; vertical-align: 2px;
+  }
+  h3 { font-size: 16px; font-weight: 600; color: var(--text); margin: 28px 0 12px; }
+
+  /* Body */
+  p { margin-bottom: 16px; font-size: 15px; }
+  p code, li code, td code {
+    font-family: var(--font-mono); font-size: 13px;
+    background: var(--surface2);
+    border: 1px solid var(--border);
+    padding: 1px 6px; border-radius: 4px;
+  }
+  ul, ol { padding-left: 20px; margin-bottom: 16px; font-size: 15px; }
+  li { margin-bottom: 6px; }
+  a { color: var(--gold); }
+  a:hover { color: var(--gold-bright); }
+
+  /* Audio card */
+  .audio-card {
+    background: var(--surface-elevated);
+    border: 1px solid var(--gold-dim);
+    border-radius: 14px;
+    padding: 24px;
+    margin: 28px 0;
+  }
+  .audio-card h3 { margin-top: 0; color: var(--gold-bright); }
+  .audio-card audio { width: 100%; margin-top: 12px; }
+  .audio-card .caption {
+    font-size: 13px; color: var(--text-dim);
+    margin-top: 12px; line-height: 1.5;
+  }
+
+  /* KPI row */
+  .kpi-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px; margin: 24px 0 32px;
+  }
+  .kpi {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 18px 16px; text-align: center;
+  }
+  .kpi-val {
+    font-family: var(--font-mono);
+    font-weight: 600; font-size: 30px;
+    line-height: 1; margin-bottom: 6px;
+    color: var(--gold);
+  }
+  .kpi-label {
+    font-size: 11px; color: var(--text-dim);
+    font-family: var(--font-mono);
+    text-transform: uppercase; letter-spacing: 0.5px;
+  }
+
+  /* Tables */
+  table {
+    width: 100%; border-collapse: collapse;
+    margin: 16px 0; font-size: 14px;
+  }
+  th, td {
+    text-align: left; padding: 10px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  th {
+    color: var(--text-dim); font-weight: 600;
+    font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;
+    border-bottom-color: var(--border-bright);
+  }
+  td.num { font-family: var(--font-mono); }
+  .wide-table { overflow-x: auto; }
+
+  /* Pull quote */
+  .pullquote {
+    font-family: var(--font-display);
+    font-size: 22px; font-style: italic;
+    color: var(--gold);
+    border-left: 3px solid var(--gold);
+    padding: 12px 0 12px 24px;
+    margin: 32px 0; line-height: 1.45;
+  }
+
+  /* ASCII diagram */
+  .ascii-diagram {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 24px 0;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.5;
+    color: var(--text-dim);
+    white-space: pre;
+  }
+  .ascii-diagram .arrow { color: var(--gold); }
+  .ascii-diagram .accent { color: var(--text-bright); }
+
+  /* Cards */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin: 20px 0;
+  }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    margin: 20px 0;
+  }
+  .card-mini {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .card-mini .label {
+    font-family: var(--font-mono); font-size: 11px;
+    color: var(--text-dim); text-transform: uppercase;
+    letter-spacing: 0.5px; margin-bottom: 4px;
+  }
+  .card-mini .val { color: var(--text); font-size: 14px; }
+
+  .badge-new { color: var(--green); }
+  .badge-not { color: var(--text-dim); }
+
+  /* CTA */
+  .cta {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--gold-dim); color: var(--gold);
+    border: 1px solid var(--gold);
+    padding: 10px 18px; border-radius: 8px;
+    font-family: var(--font-mono); font-size: 13px;
+    text-decoration: none; margin-right: 12px; margin-top: 8px;
+    transition: all 0.15s ease;
+  }
+  .cta:hover { background: var(--gold); color: var(--bg); }
+
+  .footer {
+    margin-top: 64px; padding-top: 24px;
+    border-top: 1px solid var(--border);
+    color: var(--text-dim); font-size: 13px;
+    font-family: var(--font-mono);
+  }
+
+  @media (max-width: 640px) {
+    .container { padding: 32px 16px 60px; }
+    .kpi-row { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <a href="/" class="backlink anim">← scrappylabs</a>
+
+  <div class="hero">
+    <span class="tag-bubble anim" style="--i:0">🫧 Bubble-gum thinking</span>
+    <h1 class="anim" style="--i:1">SPECVOICE: speculative execution at the <em>dialog layer</em></h1>
+    <div class="hero-meta anim" style="--i:2">
+      <span>2026-05-13</span>
+      <span>·</span>
+      <span>Weekend prototype</span>
+      <span>·</span>
+      <a href="https://github.com/scrappylabsai/specvoice">github.com/scrappylabsai/specvoice</a>
+    </div>
+    <p class="lead anim" style="--i:3">
+      <strong>Bubble-gum thinking:</strong> ideas worth chewing on, not necessarily worth swallowing.
+      This one — generalize token-level speculative decoding (MTP, DFlash) from individual tokens
+      to <em>whole utterance chunks</em>. Same shape as CPU branch prediction, just operating at
+      the dialog layer instead of the instruction stream. <strong>6.2× faster mouth-to-mouth, 16× less jitter</strong>
+      on a commodity stack. Probably not novel; definitely measurable.
+    </p>
+  </div>
+
+  <!-- AUDIBLE DEMO FIRST -->
+  <div class="audio-card anim" style="--i:4">
+    <h3>🔊 Hear the difference</h3>
+    <p style="margin-bottom: 8px; color: var(--text);">Same question, same models, same hardware. First half = <strong style="color: var(--gold-bright);">speculative</strong> (~56ms gap). Then 1.5s pause. Second half = <strong style="color: var(--text-dim);">baseline</strong> (~240ms gap). Listen for the silence after "today?":</p>
+    <audio controls preload="metadata" src="/specvoice-demo.wav">Your browser doesn't support audio playback.</audio>
+    <p class="caption">
+      The 184ms difference is right at the conscious-perception threshold for "is the system thinking?"
+      Baseline reads as "the system is processing." Speculative reads as "responsive."
+    </p>
+  </div>
+
+  <h2><span class="num">01</span>The idea</h2>
+  <p>
+    Voice agent pipelines are serial: <code>VAD → ASR → LLM → TTS</code>. Each stage gates the next.
+    Total mouth-to-mouth latency = sum of stages, and the LLM first-token step dominates (~200ms on a
+    small model, more on bigger ones).
+  </p>
+  <p>
+    Token-level speculative decoding (Medusa, DFlash, MTP) works because a draft model proposes tokens
+    in parallel that a target model verifies in one forward pass. The amortization beats serial
+    autoregressive generation.
+  </p>
+  <div class="pullquote">
+    What if you do that at the dialog layer? The "draft tokens" become whole candidate utterances.
+  </div>
+  <p>
+    At partial-ASR time (before the user finishes speaking), fork the LLM into K parallel branches
+    on different hypothesis completions. When ASR finalizes, pick the closest match via cosine
+    similarity in embedding space and commit. The winning branch's tokens are already streaming —
+    downstream TTS starts immediately. Losers get cancelled.
+  </p>
+
+  <h2><span class="num">02</span>The pipeline</h2>
+  <div class="ascii-diagram"><span class="accent">streaming ASR partials</span> <span class="arrow">─┬─►</span> LLM branch 1 (h1: "What's the weather")        <span class="arrow">─►</span> Piper TTS render 1
+                          <span class="arrow">├─►</span> LLM branch 2 (h2: "...right now")                 <span class="arrow">─►</span> Piper TTS render 2
+                          <span class="arrow">└─►</span> LLM branch 3 (h3: "...like today")                <span class="arrow">─►</span> Piper TTS render 3
+                                       <span class="arrow">│</span>
+                                       <span class="arrow">▼</span>
+                          <span class="accent">on final-ASR:</span>  embed final → cosine-sim → pick closest hypothesis
+                                       <span class="arrow">│</span>
+                                       <span class="arrow">▼</span>
+                          <span class="accent">audio out</span>  (winner's PCM already in memory)</div>
+
+  <h2><span class="num">03</span>What the numbers say</h2>
+
+  <div class="kpi-row anim">
+    <div class="kpi">
+      <div class="kpi-val">6.2×</div>
+      <div class="kpi-label">Mouth-to-mouth</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">16×</div>
+      <div class="kpi-label">Jitter reduction</div>
+    </div>
+    <div class="kpi">
+      <div class="kpi-val">54 ms</div>
+      <div class="kpi-label">Spec mean</div>
+    </div>
+  </div>
+
+  <div class="wide-table">
+    <table>
+      <thead>
+        <tr><th>Mode</th><th>Mean</th><th>Median</th><th>Stdev</th><th>Range</th></tr>
+      </thead>
+      <tbody>
+        <tr><td><strong style="color: var(--gold-bright);">Speculative</strong></td><td class="num">54.18ms</td><td class="num">51.65ms</td><td class="num">6.2ms</td><td class="num">49–66ms</td></tr>
+        <tr><td>Baseline</td><td class="num">337.21ms</td><td class="num">293.66ms</td><td class="num">102ms</td><td class="num">239–559ms</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="color: var(--text-dim); font-size: 13px; margin-top: -8px;">
+    n=8 paired trials (4 utterances × 2 reps). End-to-end stacked benchmark, real chunked-input pacing, real streaming partials.
+  </p>
+
+  <h3>The jitter story is more interesting than the speedup</h3>
+  <p>
+    Voice UX is dominated by latency <em>variance</em>, not mean. A predictable 54ms beats a jittery
+    337ms even if both were "good enough." Baseline ranges 239–559ms because ASR, LLM first-token,
+    and TTS render each have independent jitter that <em>compounds</em>. Speculative absorbs all three
+    by running them in parallel during the speech window.
+  </p>
+
+  <h2><span class="num">04</span>The stack</h2>
+  <div class="card-grid">
+    <div class="card-mini"><div class="label">VAD</div><div class="val">Silero (CPU)</div></div>
+    <div class="card-mini"><div class="label">ASR</div><div class="val">faster-whisper <code>small.en</code></div></div>
+    <div class="card-mini"><div class="label">LLM</div><div class="val">Ollama <code>qwen3.5:0.8b</code></div></div>
+    <div class="card-mini"><div class="label">TTS</div><div class="val">Piper <code>en_US-lessac-medium</code></div></div>
+    <div class="card-mini"><div class="label">Embedder</div><div class="val">MiniLM-L6-v2 (CUDA)</div></div>
+    <div class="card-mini"><div class="label">Picker</div><div class="val">Cosine sim, ~8ms</div></div>
+  </div>
+  <p>
+    One consumer GPU (RTX 5090 Laptop) for whisper + embedder, one server GPU (RTX PRO 6000) for LLM.
+    Nothing exotic. The interesting work is the orchestration, not the components.
+  </p>
+
+  <h2><span class="num">05</span>The unexpected finding</h2>
+  <p>
+    The cosine-sim picker doesn't always select the "right" hypothesis. In one demo run, partial-ASR
+    transcribed "weather" as "way" mid-stream, so the picked hypothesis was the gibberish
+    <code>"What's the way? like today"</code>. But the LLM running on it produced:
+  </p>
+  <div class="pullquote">"It is a lovely day!"</div>
+  <p>
+    A perfectly fine answer to the actual question. <strong>Speculation tolerates bad hypotheses</strong>
+    because adjacent-intent LLM responses still answer the user's actual intent. The picker selects
+    the closest available; "closest-but-wrong" is usually still useful.
+  </p>
+  <p>
+    This is the kind of thing that makes a brittle-looking system surprisingly robust. The brittleness
+    of the predictor stops mattering once the LLM is downstream.
+  </p>
+
+  <h2><span class="num">06</span>What's new, what's not</h2>
+
+  <h3>Probably not new</h3>
+  <ul>
+    <li>Streaming-ASR-with-partial-LLM-dispatching — commercial voice assistants have been doing variants since ~2018</li>
+    <li>Speculative decoding (token-level) — well-studied: Medusa, DFlash, MTP</li>
+    <li>Cosine-sim ranking — basic embedding-space comparison</li>
+    <li>Pre-fetching candidate responses — Google "barge-in," Alexa likely similar internals</li>
+  </ul>
+
+  <h3>What I haven't seen written up cleanly</h3>
+  <ul>
+    <li>Fork-and-commit <em>stacked</em> across LLM + TTS in a single open prototype</li>
+    <li>Cosine-sim commit picker on a small hypothesis bank, measured end-to-end</li>
+    <li>An <em>audible</em> A/B artifact showing what the latency difference sounds like</li>
+    <li>The "imperfect-hypothesis tolerance" observation, even though it's probably folklore</li>
+  </ul>
+  <p>
+    If you've published or built this combination, please <a href="https://github.com/scrappylabsai/specvoice/issues">open an issue</a> with a pointer.
+    Filed as bubble-gum thinking precisely because I don't know whether it's novel.
+  </p>
+
+  <h2><span class="num">07</span>Honest caveats</h2>
+  <ul>
+    <li><strong>No real intent predictor.</strong> Hypotheses are heuristic suffixes. Production needs a small classifier or n-gram LM completion to generate diverse plausible candidates.</li>
+    <li><strong>No live VAD endpoint detection.</strong> "Speech ends" is a fixed silence pad. Production needs Silero-VAD-driven endpoints.</li>
+    <li><strong>No prosody-aware stitching.</strong> Phase 1 hard-cuts at swap. Audible click (hear it in the Phase 1 artifact below). Phase 4 territory.</li>
+    <li><strong>K=3 compute cost.</strong> Three parallel LLM gens per utterance. Self-hosted: "free." API: 3×.</li>
+    <li><strong>n=8 trials.</strong> Small sample. Numbers reproduce but absolute mean shifts with hardware/network.</li>
+    <li><strong>Ollama partially serializes</strong> K=3 concurrent gens without explicit <code>OLLAMA_NUM_PARALLEL</code>. Even so, average advance was 8–27 tokens per branch by final-ASR time.</li>
+  </ul>
+
+  <h2><span class="num">08</span>Phase 1 bonus: TTS pivot speculation</h2>
+  <div class="audio-card">
+    <h3>🔊 Phase 1 interrupt artifact</h3>
+    <p style="margin-bottom: 8px; color: var(--text);">
+      Earlier sub-experiment: pre-render a "graceful pivot" utterance alongside the primary response. On
+      interrupt, swap to the pre-rendered pivot PCM <em>instantly</em> (vs. 42ms baseline to render-on-interrupt).
+    </p>
+    <audio controls preload="metadata" src="/specvoice-phase1.wav">Your browser doesn't support audio playback.</audio>
+    <p class="caption">
+      Hard-cut click at the swap is intentional and audible — prosody-aware crossfade is Phase 4 work,
+      not done here. The point is the structural latency saving, not the audio polish.
+    </p>
+  </div>
+
+  <h2><span class="num">09</span>Why I built this</h2>
+  <p>
+    DFlash and MTP have always felt like they were operating at the wrong abstraction level. Tokens are
+    too granular for a lot of what makes voice agents feel slow. The slowness lives at boundaries:
+    ASR-final → LLM-start, LLM-done → TTS-start. Each boundary is a serial gate where speculation
+    could amortize the waiting.
+  </p>
+  <p>
+    Whether or not anyone ships this exact stack, the framing — "fork at uncertainty, commit at
+    resolution, in parallel during the speech window" — feels like a useful mental model for designing
+    voice systems. Even if it turns out to be reinvention of prior art, it's reinvention I needed to
+    do to understand the shape.
+  </p>
+
+  <h2><span class="num">10</span>What's filed</h2>
+  <p>
+    Open-source on GitHub. Reproduces in one session on any reasonable GPU setup. License: MIT.
+  </p>
+  <p>
+    <a class="cta" href="https://github.com/scrappylabsai/specvoice">→ Code on GitHub</a>
+    <a class="cta" href="/specvoice-demo.wav" style="background: transparent;">→ Download A/B WAV</a>
+  </p>
+
+  <div class="footer">
+    <p>
+      Filed under <strong style="color: var(--pink);">🫧 bubble-gum thinking</strong> at <a href="/">scrappylabs.ai</a>.
+      Ideas chewed, sometimes spat out, occasionally something turns into product. This one we'll see.
+    </p>
+    <p style="margin-top: 12px;">
+      Adjacent: <a href="/three-tier-memory">three-tier memory for Claude Code</a> · <a href="/scrappy-tools">scrappy tools</a>
+    </p>
+  </div>
+
+</div>
+</body>
+</html>
