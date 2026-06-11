@@ -1435,16 +1435,26 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     typingEl.classList.add('active');
     messagesEl.scrollTop = messagesEl.scrollHeight;
 
+    // Primary: Mother (our GPU). Fallback: api2 on the VPS — survives a primary outage.
+    var CHAT_ENDPOINTS = [
+      'https://api.scrappylabs.ai/v1/chat/completions',
+      'https://api2.scrappylabs.ai/v1/chat/completions'
+    ];
     try {
-      var res = await fetch('https://api.scrappylabs.ai/v1/chat/completions', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ messages: history, max_tokens: 500 })
-      });
-      if (!res.ok) {
-        var err = await res.json().catch(function() { return {}; });
-        throw new Error(err.detail || 'Request failed');
+      var res = null;
+      for (var i = 0; i < CHAT_ENDPOINTS.length; i++) {
+        try {
+          res = await fetch(CHAT_ENDPOINTS[i], {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ messages: history, max_tokens: 500 }),
+            signal: (AbortSignal && AbortSignal.timeout) ? AbortSignal.timeout(30000) : undefined
+          });
+          if (res.ok) break;
+          res = null;
+        } catch (fetchErr) { res = null; }
       }
+      if (!res) throw new Error('All chat endpoints failed');
       var data = await res.json();
       var reply = data.choices[0].message.content;
       history.push({ role: 'assistant', content: reply });
