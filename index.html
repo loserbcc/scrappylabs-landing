@@ -3,10 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>ScrappyLabs — AI Agents That Work</title>
-<meta name="description" content="ScrappyLabs builds AI into how your business actually runs — at 3 AM, on a holiday, while you sleep. Voice agents, bookkeeping, knowledge bases, custom automation. In production today.">
-<meta property="og:title" content="ScrappyLabs — AI Agents That Work">
-<meta property="og:description" content="The best infrastructure is the kind nobody notices. AI built into how your business actually runs — voice agents, bookkeeping, knowledge bases, custom automation. Running today.">
+<title>ScrappyLabs — The Technology Partner for Teams That Win</title>
+<meta name="description" content="ScrappyLabs is the full-spectrum technology partner for organizations that play to win. AI, infrastructure, automation, voice, migrations — if it needs to be done, we do it. And it stays done.">
+<meta property="og:title" content="ScrappyLabs — The Technology Partner for Teams That Win">
+<meta property="og:description" content="One partner. Every problem. Done right. AI, infrastructure, automation, voice, migrations — bring your hardest problem and we'll tell you exactly how we'd kill it.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://scrappylabs.ai">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -377,9 +377,13 @@ section { padding: 6rem 2rem; max-width: 1200px; margin: 0 auto; }
 /* ---- HOW IT WORKS ---- */
 .steps-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   gap: 1.5rem;
   position: relative;
+}
+@media (max-width: 1000px) and (min-width: 769px) {
+  .steps-grid { grid-template-columns: repeat(2, 1fr); }
+  .steps-grid::before { display: none; }
 }
 .steps-grid::before {
   content: '';
@@ -895,7 +899,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     <a href="#how" class="nav-link">How It Works</a>
     <a href="#work" class="nav-link">Work</a>
     <a href="#contact" class="nav-link">Contact</a>
-    <a href="#contact" class="nav-cta">Let's Talk</a>
+    <a href="#contact" class="nav-cta">Meet With Brian</a>
     <button class="mobile-menu" onclick="document.querySelector('nav').classList.toggle('open')" aria-label="Menu">
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
     </button>
@@ -910,18 +914,18 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     accepting new clients
   </div>
   <h1>
-    The best infrastructure<br>
-    is the kind <span class="gradient">nobody notices.</span>
+    The teams that win<br>
+    <span class="gradient">don't do it alone.</span>
   </h1>
   <p class="hero-sub">
-    AI built into how your business actually runs &mdash; at 3 AM, on a holiday, while you sleep.
-    Voice agents, bookkeeping, knowledge bases, custom automation.
-    <strong>In production today.</strong>
+    ScrappyLabs is the technology partner for organizations that play to win.
+    AI. Infrastructure. Automation. Voice. Migrations.
+    <strong>If it needs to be done, we do it &mdash; and it stays done.</strong>
   </p>
-  <p class="hero-origin">// <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="87e5f5eee6e9c7f4e4f5e6f7f7feebe6e5f4a9e6ee">[email&#160;protected]</a> &mdash; building since '93</p>
+  <p class="hero-origin">// <a href="mailto:brian@scrappylabs.ai">brian@scrappylabs.ai</a> &mdash; building since '93</p>
   <div class="hero-actions">
-    <a href="#contact" class="btn btn-primary">Let's Talk</a>
-    <a href="#work" class="btn btn-secondary">See Our Work</a>
+    <a href="#contact" class="btn btn-primary">Meet With Brian</a>
+    <a href="#work" class="btn btn-secondary">See It Running</a>
   </div>
 </section>
 <button class="mascot-peek" id="mascot-peek" aria-label="View mascot artwork">
@@ -930,34 +934,66 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
 </button>
 </div>
 
+<!-- TICKER -->
+<div class="ticker-wrap" aria-hidden="true">
+  <div class="ticker">
+    <span>AI Agents</span><span class="sep">/</span>
+    <span>Voice &amp; Phones</span><span class="sep">/</span>
+    <span>Cloud &amp; Email Migrations</span><span class="sep">/</span>
+    <span>GPU Infrastructure</span><span class="sep">/</span>
+    <span>Knowledge Bases</span><span class="sep">/</span>
+    <span>Automation</span><span class="sep">/</span>
+    <span>Fractional CTO</span><span class="sep">/</span>
+    <span>24/7 Operations</span><span class="sep">/</span>
+    <span>AI Agents</span><span class="sep">/</span>
+    <span>Voice &amp; Phones</span><span class="sep">/</span>
+    <span>Cloud &amp; Email Migrations</span><span class="sep">/</span>
+    <span>GPU Infrastructure</span><span class="sep">/</span>
+    <span>Knowledge Bases</span><span class="sep">/</span>
+    <span>Automation</span><span class="sep">/</span>
+    <span>Fractional CTO</span><span class="sep">/</span>
+    <span>24/7 Operations</span><span class="sep">/</span>
+  </div>
+</div>
+
 <!-- SERVICES -->
 <section id="services">
   <span class="section-label">// What We Do</span>
-  <h2 class="section-title">AI consulting that ships.</h2>
+  <h2 class="section-title">Everything technology. One partner.</h2>
   <p class="section-desc">
-    We work with your team to find where AI fits and build it. From healthcare research
-    to small business operations &mdash; no six-month roadmaps, working software in weeks.
+    Most firms sell you a slice and point fingers at the rest. We take the whole problem.
+    Strategy through 3 AM operations &mdash; one partner, full accountability, working software in weeks.
   </p>
   <div class="services-grid">
 
     <div class="service-card">
-      <h3>Find where AI fits.</h3>
-      <p>Not sure where to start? We audit your operations, find the high-impact targets, and hand back a plan you can act on this month &mdash; not next year.</p>
+      <h3>AI that earns its keep.</h3>
+      <p>Agents that answer phones, chase invoices, search your archives, and triage the inbox. Private knowledge bases trained on your data. Built around your operations &mdash; not generic templates &mdash; and measured by the work they take off your plate.</p>
     </div>
 
     <div class="service-card">
-      <h3>Agents that do the work.</h3>
-      <p>Answer the phones. Chase the invoices. Search the archive. Triage the inbox. Built around your operations, not generic templates.</p>
+      <h3>Voice your customers trust.</h3>
+      <p>Phone agents people can't tell from humans. 100+ voices, voice cloning, custom voice design. Runs on our GPU hardware &mdash; no per-minute cloud bills, no third party listening in.</p>
     </div>
 
     <div class="service-card">
-      <h3>Voice that sounds human.</h3>
-      <p>Phone agents your customers can't tell from humans. 100+ voices, voice cloning, custom voice design. Runs on our GPU hardware &mdash; no per-minute cloud bills.</p>
+      <h3>Migrations without the misery.</h3>
+      <p>Email, file storage, phone systems, whole office suites &mdash; we move entire firms between platforms without losing a file or dropping a call. Your team shows up Monday and everything just works.</p>
     </div>
 
     <div class="service-card">
-      <h3>Built to run unattended.</h3>
-      <p>We deploy and maintain everything that runs your AI. Servers, GPUs, monitoring, automated recovery. Something breaks at 3am &mdash; it's already being fixed.</p>
+      <h3>Infrastructure that doesn't blink.</h3>
+      <p>Servers, GPUs, networks, monitoring, automated recovery. We build it, run it, and watch it. Something breaks at 3 AM &mdash; it's already being fixed before you knew it was broken.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>A CTO on your side of the table.</h3>
+      <p>Vendor negotiations, build-vs-buy calls, security reviews, technology roadmaps. Thirty years of pattern recognition, on demand &mdash; without the executive salary.</p>
+    </div>
+
+    <div class="service-card">
+      <h3>And everything in between.</h3>
+      <p>The legacy system nobody will touch. The integration two vendors say is impossible. The thing that's been broken so long you stopped asking. Bring it. <strong style="color: var(--text);">If it needs to be done, we do it.</strong></p>
     </div>
 
   </div>
@@ -966,35 +1002,65 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
 <!-- HOW IT WORKS -->
 <section id="how">
   <span class="section-label">// How It Works</span>
-  <h2 class="section-title">Talk. Build. Ship.</h2>
+  <h2 class="section-title">Meet. Plan. Ship. Run.</h2>
   <p class="section-desc">
-    Most AI projects take months before anyone sees results. We flip that.
+    Most consultants take months to produce a deck. We take weeks to produce working software &mdash; then we stand behind it.
   </p>
   <div class="steps-grid">
     <div class="step-card">
       <div class="step-number">01</div>
-      <h3>Talk</h3>
-      <p>We learn your business. What's working, what's not. Free initial consultation &mdash; no contracts, no NDAs.</p>
+      <h3>Meet</h3>
+      <p>One conversation. Bring your hardest problem &mdash; broken, slow, expensive, or impossible. You leave knowing exactly how we'd kill it, whether you hire us or not.</p>
     </div>
     <div class="step-card">
       <div class="step-number">02</div>
-      <h3>Build</h3>
-      <p>We develop in the open. Real progress daily, working demos, real data. Not next quarter &mdash; this week.</p>
+      <h3>Plan</h3>
+      <p>A plan you can act on this month, not next year. High-impact targets first, honest about what's worth doing &mdash; and what isn't.</p>
     </div>
     <div class="step-card">
       <div class="step-number">03</div>
       <h3>Ship</h3>
-      <p>Deploy on your hardware or ours. We handle migration, monitoring, and support. You own everything.</p>
+      <p>We build in the open. Real progress daily, working demos on real data. Deploy on your hardware or ours &mdash; you own everything.</p>
+    </div>
+    <div class="step-card">
+      <div class="step-number">04</div>
+      <h3>Run</h3>
+      <p>We don't ship and vanish. Monitoring, maintenance, automated recovery, a human who answers. It works on day one and it's still working on day one thousand.</p>
     </div>
   </div>
 </section>
 
+<!-- EXPERIENCE BAR -->
+<div class="exp-section">
+  <div class="exp-inner">
+    <div class="exp-grid">
+      <div class="exp-stat">
+        <div class="number">30+</div>
+        <div class="label">Years Building</div>
+      </div>
+      <div class="exp-stat">
+        <div class="number">Weeks</div>
+        <div class="label">To Production, Not Quarters</div>
+      </div>
+      <div class="exp-stat">
+        <div class="number">24/7</div>
+        <div class="label">Monitored Operations</div>
+      </div>
+      <div class="exp-stat">
+        <div class="number">100%</div>
+        <div class="label">Yours &mdash; You Own Everything</div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- WORK -->
 <section id="work">
-  <span class="section-label">// Currently Running</span>
-  <h2 class="section-title">In production.</h2>
+  <span class="section-label">// Proof</span>
+  <h2 class="section-title">Don't take our word for it. It's running.</h2>
   <p class="section-desc">
-    Live systems handling real work. Not mockups. Not pitch decks.
+    Anyone can claim "we do it all." Here's ours, live, handling real work right now.
+    Not mockups. Not pitch decks. Production.
   </p>
   <div class="projects-grid">
 
@@ -1064,39 +1130,41 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
 
 <!-- PHILOSOPHY -->
 <section id="about">
-  <span class="section-label">// Philosophy</span>
-  <h2 class="section-title">How we think.</h2>
-  <p class="section-desc">
-    Three things we keep on the wall.
-  </p>
-  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.25rem; margin-top: 2.5rem;">
+  <span class="section-label">// Why We Win</span>
+  <h2 class="section-title">Four things we keep on the wall.</h2>
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.25rem; margin-top: 2.5rem;">
     <div style="padding: 1.5rem;">
       <h3 style="font-weight: 800; margin-bottom: 0.5rem; font-size: 1rem;">Ship first, polish second.</h3>
       <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Working software beats perfect proposals. We build, deploy, and iterate in production &mdash; not in committee.</p>
     </div>
     <div style="padding: 1.5rem;">
       <h3 style="font-weight: 800; margin-bottom: 0.5rem; font-size: 1rem;">Own the stack.</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Local GPUs over cloud lock-in. When you understand every layer, you can fix anything, anywhere.</p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">Our own GPUs over cloud lock-in. When you understand every layer, you can fix anything, anywhere &mdash; and nobody can rent-seek you.</p>
+    </div>
+    <div style="padding: 1.5rem;">
+      <h3 style="font-weight: 800; margin-bottom: 0.5rem; font-size: 1rem;">One throat to choke.</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">No vendor finger-pointing, no "that's not our layer." If it's technology and it's yours, it's our problem. That's the deal.</p>
     </div>
     <div style="padding: 1.5rem;">
       <h3 style="font-weight: 800; margin-bottom: 0.5rem; font-size: 1rem;">No company too small.</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">A one-person shop deserves the same AI tools as a Fortune 500. We build systems that scale both ways.</p>
+      <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.6;">A one-person shop deserves the same firepower as a Fortune 500. We build systems that scale both ways.</p>
     </div>
   </div>
 </section>
 
 <!-- CONTACT -->
 <section id="contact" class="cta-section">
-  <span class="section-label">// Let's Build Something</span>
-  <h2 class="section-title">Get in touch.</h2>
+  <span class="section-label">// Bring Your Hardest Problem</span>
+  <h2 class="section-title">Meet with Brian.</h2>
   <p class="section-desc">
-    Free initial consultation. We'll talk about what your business needs
-    and whether we're the right fit. No pitch, no pressure.
+    One conversation. Bring the thing that's broken, slow, expensive, or impossible.
+    You'll leave knowing exactly how we'd kill it &mdash; whether you hire us or not.
+    Free. No pitch deck, no pressure.
   </p>
   <div class="contact-links">
-    <a href="/cdn-cgi/l/email-protection#bcdeced5ddd2fccfdfceddccccc5d0dddecf92ddd5" class="contact-chip">
+    <a href="mailto:brian@scrappylabs.ai" class="contact-chip">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M22 4L12 13 2 4"/></svg>
-      <span class="__cf_email__" data-cfemail="eb8999828a85ab9888998a9b9b92878a8998c58a82">[email&#160;protected]</span>
+      brian@scrappylabs.ai
     </a>
     <a href="https://github.com/scrappylabsai" class="contact-chip" target="_blank">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
@@ -1128,7 +1196,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
       <a href="https://github.com/scrappylabsai">GitHub</a>
       <a href="https://www.linkedin.com/in/brian-connelly-3b6a451" target="_blank" rel="noopener">LinkedIn</a>
       <a href="https://discord.gg/ekRv2zJCHT">Discord</a>
-      <a href="/cdn-cgi/l/email-protection#86e4f4efe7e8c6f5e5f4e7f6f6ffeae7e4f5a8e7ef">Contact</a>
+      <a href="mailto:brian@scrappylabs.ai">Contact</a>
       <a href="/privacy">Privacy</a>
       <a href="/tos">Terms</a>
     </div>
@@ -1157,7 +1225,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
     </button>
   </div>
   <div class="chat-messages" id="chat-messages">
-    <div class="chat-msg chat-msg-bot">Hey! I'm the ScrappyLabs AI. Ask me about our consulting services, what we've built, or how we can help your business. What's on your mind?</div>
+    <div class="chat-msg chat-msg-bot">Hey! I'm the ScrappyLabs AI. Got a problem that's broken, slow, expensive, or impossible? Tell me about it &mdash; or ask what we do and what we've shipped.</div>
     <div class="chat-typing" id="chat-typing"><span></span><span></span><span></span></div>
   </div>
   <div class="chat-input-area">
@@ -1169,7 +1237,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
   </div>
 </div>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 (function() {
   // ---- Hero Background ----
   var heroBgs = [
@@ -1323,7 +1391,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
   var typingEl = document.getElementById('chat-typing');
   var sending = false;
 
-  var SYSTEM_PROMPT = "You are the ScrappyLabs AI assistant on scrappylabs.ai. ScrappyLabs is an AI consulting and development shop that helps businesses build and deploy AI systems that actually work.\n\nWhat we do:\n- Strategy & Implementation: We audit operations, find where AI fits, and build it. Working software in weeks, not months.\n- Custom AI Agents: Agents that handle real work \u2014 calls, orders, monitoring, bookkeeping. Built around each business.\n- Voice AI: 100+ voices, voice cloning, natural phone agents. Runs on our own GPU hardware \u2014 no per-minute cloud bills.\n- Infrastructure & Operations: We deploy and manage servers, GPUs, monitoring, automated recovery.\n\nLive systems:\n- BrainJack (brainjack.ai) \u2014 Voice-to-keystroke. Speak into your phone, words appear on your computer. iOS + Mac/Windows/Linux + USB dongle. Beta on TestFlight.\n- Voice AI Platform (tts.scrappylabs.ai) \u2014 100+ voices, cloning, voice design.\n- AI Bookkeeper \u2014 QuickBooks Online integration. Invoicing, expenses, reports in plain English.\n- loser.com \u2014 Our public playground for experiments.\n\nHow we work:\n1. Talk \u2014 Free consultation. We learn your business.\n2. Build \u2014 We develop live. Real progress daily.\n3. Ship \u2014 Deploy on your hardware or ours. You own everything.\n\nFounded by Brian \u2014 30+ years building software, infrastructure, and AI. Based in Asheville, NC.\n\nContact: brian@scrappylabs.ai\nGitHub: github.com/scrappylabsai\n\nRules:\n- Be friendly, direct, concise \u2014 no corporate speak.\n- 2-4 sentences unless asked for detail.\n- For consulting inquiries, suggest emailing brian@scrappylabs.ai.\n- Don't make up features or services not listed above.\n- Any company size can work with us.";
+  var SYSTEM_PROMPT = "You are the ScrappyLabs AI assistant on scrappylabs.ai. ScrappyLabs is the full-spectrum technology partner for organizations that play to win \u2014 AI, infrastructure, automation, voice, migrations. If it needs to be done, we do it, and it stays done.\n\nWhat we do (the whole problem, not a slice):\n- AI that earns its keep: custom agents (calls, invoices, inbox triage, archive search), private knowledge bases on the client's data.\n- Voice AI: 100+ voices, voice cloning, phone agents people can't tell from humans. Runs on our own GPU hardware \u2014 no per-minute cloud bills.\n- Migrations & modernization: email, file storage, phone systems, whole office suites \u2014 entire firms moved between platforms without losing a file.\n- Infrastructure & operations: servers, GPUs, networks, monitoring, automated recovery. 24/7 \u2014 if it breaks at 3 AM it's being fixed at 3 AM.\n- Fractional CTO: vendor negotiations, build-vs-buy, security reviews, roadmaps \u2014 30 years of pattern recognition without the executive salary.\n- Everything in between: legacy systems, impossible integrations, the thing that's been broken so long people stopped asking.\n\nLive systems (proof):\n- BrainJack (brainjack.ai) \u2014 Voice-to-keystroke. Speak into your phone, words appear on your computer. iOS + Mac/Windows/Linux + USB dongle. Beta on TestFlight.\n- Voice AI Platform (tts.scrappylabs.ai) \u2014 100+ voices, cloning, voice design.\n- AI Bookkeeper \u2014 QuickBooks Online integration. Invoicing, expenses, reports in plain English.\n- loser.com \u2014 Our public playground for experiments.\n\nHow we work:\n1. Meet \u2014 One free conversation. Bring your hardest problem; you leave knowing exactly how we'd solve it, hire us or not.\n2. Plan \u2014 A plan you can act on this month, honest about what's worth doing.\n3. Ship \u2014 Built in the open, working demos on real data, deployed on your hardware or ours. You own everything.\n4. Run \u2014 We don't ship and vanish. Monitoring, maintenance, a human who answers.\n\nFounded by Brian \u2014 30+ years building software, infrastructure, and AI. Building since '93. Based in Asheville, NC.\n\nContact: brian@scrappylabs.ai\nGitHub: github.com/scrappylabsai\n\nRules:\n- Be confident, direct, concise \u2014 no corporate speak, no hedging.\n- 2-4 sentences unless asked for detail.\n- For consulting inquiries, suggest emailing brian@scrappylabs.ai to set up a meeting.\n- Don't make up features, clients, or services not listed above.\n- Any company size can work with us \u2014 one-person shops to enterprises.";
 
   var history = [{ role: 'system', content: SYSTEM_PROMPT }];
 
