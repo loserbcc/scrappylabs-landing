@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Log — Notes from the Workshop | ScrappyLabs</title>
+<meta name="description" content="Notes, experiments, and the occasional word of crazy from the ScrappyLabs workshop. Built in the open — half documentation, half thinking out loud.">
+<meta property="og:title" content="The Log — ScrappyLabs">
+<meta property="og:description" content="Notes, experiments, and the occasional word of crazy from the workshop. Built in the open.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://scrappylabs.ai/log">
+<meta name="color-scheme" content="dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+:root{
+  --bg:#0a0a0f; --surface:#13131c; --surface-2:#1a1a28; --border:#2a2a3e; --border-hover:#3a3a52;
+  --text:#f0f0f5; --text-muted:#8a8aa0; --text-dim:#5a5a72;
+  --accent:#ff6b35; --accent-hover:#ff8555; --accent-glow:rgba(255,107,53,0.15);
+  --cyan:#00d4ff; --green:#2ed573;
+  --font:'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --mono:'JetBrains Mono','Fira Code',monospace;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--bg); color:var(--text); font-family:var(--font); line-height:1.6;
+  overflow-x:hidden; -webkit-font-smoothing:antialiased; min-height:100vh;}
+a{color:var(--accent); text-decoration:none; transition:color .2s;}
+a:hover{color:var(--accent-hover);}
+body::before{content:''; position:fixed; inset:0; z-index:9999; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");}
+
+/* header — matches the secondary-page chrome on the rest of the site */
+header{position:fixed; top:0; left:0; right:0; z-index:100; height:64px; padding:0 clamp(1rem,4vw,2rem);
+  display:flex; align-items:center; justify-content:space-between;
+  background:rgba(10,10,15,.85); backdrop-filter:blur(20px); border-bottom:1px solid var(--border);}
+.logo{font-size:1.25rem; font-weight:900; letter-spacing:-.5px;
+  background:linear-gradient(135deg,var(--accent),var(--cyan)); -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent; background-clip:text;}
+.logo span{font-weight:500; opacity:.7; -webkit-text-fill-color:initial; color:var(--text-muted);}
+.head-nav{display:flex; gap:clamp(1rem,3vw,2rem); align-items:center;}
+.head-nav a{color:var(--text-muted); font-size:.8rem; font-weight:600; letter-spacing:.5px; text-transform:uppercase;}
+.head-nav a:hover{color:var(--text);}
+.head-cta{background:var(--accent); color:var(--bg)!important; padding:.5rem 1.1rem; border-radius:8px;
+  font-weight:700; font-size:.78rem;}
+.head-cta:hover{background:var(--accent-hover); box-shadow:0 4px 20px var(--accent-glow);}
+
+/* layout */
+.wrap{max-width:860px; margin:0 auto; padding:120px clamp(1.2rem,5vw,2rem) 100px;}
+
+/* intro */
+.eyebrow{font-family:var(--mono); font-size:.78rem; letter-spacing:.28em; text-transform:uppercase;
+  color:var(--accent); display:flex; align-items:center; gap:.7rem;}
+.eyebrow::before{content:''; width:26px; height:1px; background:var(--accent);}
+.intro h1{font-size:clamp(2.6rem,8vw,4.4rem); font-weight:900; letter-spacing:-.03em; line-height:1;
+  margin:1.1rem 0 0; text-wrap:balance;}
+.intro h1 .glow{background:linear-gradient(135deg,var(--accent),var(--cyan));
+  -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;}
+.intro .lede{color:var(--text-muted); font-size:clamp(1.05rem,2.4vw,1.25rem); max-width:60ch;
+  margin:1.5rem 0 0; line-height:1.7;}
+.intro .lede b{color:var(--text); font-weight:600;}
+
+/* divider label */
+.divider{display:flex; align-items:center; gap:1rem; margin:clamp(3rem,7vw,4.5rem) 0 2rem;
+  font-family:var(--mono); font-size:.78rem; letter-spacing:.18em; text-transform:uppercase; color:var(--text-dim);}
+.divider::after{content:''; flex:1; height:1px; background:var(--border);}
+
+/* post cards */
+.posts{display:flex; flex-direction:column; gap:1.1rem;}
+.post{display:block; background:var(--surface); border:1px solid var(--border); border-radius:14px;
+  padding:1.5rem 1.6rem; transition:border-color .22s ease, transform .22s ease, box-shadow .22s ease;}
+.post:hover{border-color:var(--border-hover); transform:translateY(-2px);
+  box-shadow:0 16px 44px -26px rgba(0,0,0,.7);}
+.post .meta{display:flex; flex-wrap:wrap; gap:.6rem 1rem; align-items:center; font-family:var(--mono);
+  font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:var(--text-dim);}
+.post .kind{color:var(--cyan);}
+.post h2{font-size:1.5rem; font-weight:800; letter-spacing:-.01em; margin:.55rem 0 .5rem; color:var(--text);
+  text-wrap:balance;}
+.post:hover h2{color:var(--accent-hover);}
+.post p{color:var(--text-muted); font-size:1rem; line-height:1.65; margin:0 0 1rem;}
+.post .read{font-family:var(--mono); font-size:.8rem; font-weight:700; letter-spacing:.04em; color:var(--accent);}
+.post:hover .read{color:var(--accent-hover);}
+.tags{display:flex; flex-wrap:wrap; gap:.5rem; margin-top:.2rem;}
+.tag{font-family:var(--mono); font-size:.68rem; letter-spacing:.03em; padding:.28rem .6rem; border-radius:999px;
+  border:1px solid var(--border); color:var(--text-muted); background:var(--surface-2);}
+
+/* footer */
+footer{border-top:1px solid var(--border); padding:2rem clamp(1.2rem,5vw,2rem);
+  color:var(--text-dim); font-size:.85rem; text-align:center;}
+footer a{color:var(--text-muted);} footer a:hover{color:var(--text);}
+footer .note{font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; color:var(--text-dim); margin-top:.5rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo" aria-label="ScrappyLabs home">ScrappyLabs<span>.ai</span></a>
+  <nav class="head-nav">
+    <a href="/">Home</a>
+    <a href="mailto:brian@scrappylabs.ai" class="head-cta">Meet With Brian</a>
+  </nav>
+</header>
+
+<main class="wrap">
+  <section class="intro">
+    <div class="eyebrow">ScrappyLabs · The Log</div>
+    <h1>Words of <span class="glow">crazy</span>,<br>from the workshop.</h1>
+    <p class="lede">Our corner for thinking out loud. Half of what lands here is documentation, half is us working an idea in public, and some of it is a hunch that had no business working — until it did. We <b>build in the open</b>; this is where we say what we found. New entries as they happen.</p>
+  </section>
+
+  <div class="divider">Latest</div>
+
+  <div class="posts">
+
+    <a class="post" href="https://stuff.scrappylabs.ai/public/blog/fleet-log.html">
+      <div class="meta"><span class="kind">Field Log</span><span>08 Jul 2026</span><span>· 4 min read</span></div>
+      <h2>Fleet Log — Thirty Days in the Open</h2>
+      <p>One builder, one fleet, thirty days — read back from the fleet's own memory. What shipped, what broke and got written down, and what the machines learned to do while nobody was watching. A field log, not a plan.</p>
+      <div class="tags">
+        <span class="tag">local AI fleet</span>
+        <span class="tag">voice agents</span>
+        <span class="tag">self-healing memory</span>
+        <span class="tag">retrospective</span>
+      </div>
+      <div class="read" style="margin-top:1rem">Read the log →</div>
+    </a>
+
+  </div>
+</main>
+
+<footer>
+  <div>&copy; 2026 ScrappyLabs. Building since '93. &nbsp;|&nbsp; <a href="/">Home</a> &nbsp;|&nbsp; <a href="mailto:brian@scrappylabs.ai">Contact</a></div>
+  <div class="note">built in the open · asheville, nc</div>
+</footer>
+
+</body>
+</html>
