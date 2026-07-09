@@ -239,6 +239,15 @@ nav a:hover { color: var(--text); }
   background: var(--surface-2);
 }
 
+/* Live/asleep pill on the "Talk to Scrappy" CTA — reflects the voice backend. */
+.scrappy-status {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  font-family: var(--mono); font-size: 0.68rem; color: var(--text-muted);
+}
+.scrappy-status .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--text-muted); }
+.scrappy-status.live { color: var(--green); }
+.scrappy-status.live .dot { background: var(--green); animation: pulse 2s ease-in-out infinite; }
+
 /* ---- MASCOT PEEK ---- */
 .mascot-peek {
   position: absolute;
@@ -927,6 +936,7 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
   <div class="hero-actions">
     <a href="#contact" class="btn btn-primary">Meet With Brian</a>
     <a href="#work" class="btn btn-secondary">See It Running</a>
+    <a href="https://chatty.scrappylabs.ai/" class="btn btn-secondary" id="talk-scrappy">🎙️ Talk to Scrappy<span class="scrappy-status" id="scrappy-status" aria-live="polite"></span></a>
   </div>
 </section>
 <button class="mascot-peek" id="mascot-peek" aria-label="View mascot artwork">
@@ -1484,6 +1494,26 @@ footer { border-top: 1px solid var(--border); padding: 2rem; text-align: center;
 })();
 </script>
 
+<script>
+// "Talk to Scrappy" live status — probe the demo's /api/health so the CTA shows
+// whether the voice backend is actually up before anyone taps in.
+(function () {
+  var pill = document.getElementById('scrappy-status');
+  if (!pill) return;
+  function paint(up) {
+    pill.className = 'scrappy-status' + (up ? ' live' : '');
+    pill.innerHTML = '<span class="dot"></span>' + (up ? 'live now' : 'napping');
+  }
+  function check() {
+    fetch('https://chatty.scrappylabs.ai/api/health', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : { backend: false }; })
+      .then(function (d) { paint(!!d.backend); })
+      .catch(function () { paint(false); });
+  }
+  check();
+  setInterval(check, 30000);
+})();
+</script>
 <script>navigator.sendBeacon&&navigator.sendBeacon('https://sensor.loser.com/hit?site=scrappylabs.ai')</script>
 
 </body>
