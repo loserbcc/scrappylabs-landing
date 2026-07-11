@@ -3,3 +3,4 @@
 node_modules/
 preview-*.png
 .DS_Store
+preview_server.py

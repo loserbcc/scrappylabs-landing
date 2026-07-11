@@ -105,6 +105,8 @@ html.scrolled .hud{opacity:0; pointer-events:none}
 .hero h1{font-family:var(--disp); font-weight:400; letter-spacing:.015em;
   font-size:clamp(2.05rem,5.2vw,4.3rem); line-height:1.14; color:#fff; margin:.2rem 0 1.2rem;
   max-width:15ch; text-shadow:0 0 60px rgba(255,107,53,.28)}
+.hero h1 .hl{color:var(--amber); text-shadow:0 0 42px rgba(255,107,53,.55)}
+code{font-family:var(--mono); font-size:.9em; color:var(--amber-ink)}
 .hero-sub{max-width:52ch; color:var(--body); font-size:1.08rem}
 .hero-sub .em{color:var(--amber-ink)}
 .hero-meta{font-family:var(--mono); font-size:.82rem; color:var(--muted); margin-top:1.4rem; letter-spacing:.02em}
