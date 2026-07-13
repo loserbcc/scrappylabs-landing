@@ -4,5 +4,12 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
 
+# Scrappy rep lives here — needs the mic (voice) and camera (video, later).
+# More specific path wins over the /* lock above for the Permissions-Policy header.
+/scrappy/*
+  Permissions-Policy: camera=(self), microphone=(self), geolocation=()
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+
 /index.html
   Cache-Control: no-cache, no-store, must-revalidate
