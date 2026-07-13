@@ -15,6 +15,13 @@ export async function onRequest(context) {
   const { request } = context;
   const url = new URL(request.url);
 
+  // Bare /scrappy MUST become /scrappy/ or the rep's relative assets (main.js,
+  // style.css) resolve against the site root and 404. Handle it here because
+  // this catch-all shadows a sibling functions/scrappy.js on some routings.
+  if (url.pathname === "/scrappy") {
+    return Response.redirect(new URL("/scrappy/", url).toString(), 308);
+  }
+
   // /scrappy/ -> /   ·   /scrappy/main.js -> /main.js   ·   /scrappy/api/x -> /api/x
   const backendPath = url.pathname.replace(/^\/scrappy/, "") || "/";
   const target = BACKEND + backendPath + url.search;
