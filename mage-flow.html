@@ -9,7 +9,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mage-Flow, first light — ScrappyLabs">
 <meta property="og:description" content="A 4B MIT-licensed image model, measured on our own hardware. Faster than its spec sheet, at half the memory.">
-<meta property="og:url" content="https://scrappylabs.ai/mage-flow">
+<meta property="og:url" content="https://scrappylabs.ai/mage-flow.html">
 <meta property="og:image" content="https://scrappylabs.ai/mf-hero-wrangler.webp">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="styles.css">
@@ -172,6 +172,19 @@
   <img src="mf-workbench.webp" alt="Arranged with negative space, which most models refuse to leave alone." loading="lazy" width="1216" height="832">
   <figcaption><b>Flat-lay</b><span>Arranged with negative space, which most models refuse to leave alone.</span><em>1216×832 · 3.02s</em></figcaption>
 </figure>
+    </div>
+    <div class="note">
+      <h3>How reliable is it? Not perfectly — and that matters more than the win</h3>
+      <p>Every image above is a first output. But we went back and generated that embroidered patch
+      <b>five more times</b>, and the model misspelled the word “SCRAPPY” in <b>all five</b> — dropping a
+      letter each time. Curved lettering is roughly a coin flip. The one above got it right; five in a row
+      after it did not.</p>
+      <p>What <em>did</em> work: taking the correct patch and using the <b>editing</b> model to recolour it.
+      The lettering survived untouched. So the practical rule we came away with is — generate until the
+      text is right, then <em>edit</em> rather than regenerate, because editing preserves glyphs that
+      generation will happily re-roll.</p>
+      <p>Treat output like this as a draft a human proofreads, never as typesetting. That's true of every
+      image model we've tested, and anyone telling you otherwise hasn't run it five times.</p>
     </div>
   </section>
 
