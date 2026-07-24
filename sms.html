@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMS Terms &amp; Consent — ScrappyLabs</title>
+<meta name="description" content="ScrappyLabs (a d/b/a of Loser.com LLC) SMS text-messaging terms, consent, and opt-out information.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --bg: #0a0a0f;
+  --surface: #13131c;
+  --border: #2a2a3e;
+  --text: #f0f0f5;
+  --text-muted: #8a8aa0;
+  --accent: #ff6b35;
+  --accent-hover: #ff8555;
+  --cyan: #00d4ff;
+  --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
+a:hover { color: var(--accent-hover); }
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 9999;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  padding: 0 2rem;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  background: rgba(10, 10, 15, 0.85);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+}
+
+.logo {
+  font-size: 1.25rem;
+  font-weight: 900;
+  background: linear-gradient(135deg, var(--accent), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+main {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 120px 2rem 80px;
+}
+
+.section-label {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+h1 {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  margin-bottom: 0.5rem;
+}
+
+.last-updated {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  margin-bottom: 3rem;
+}
+
+h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  color: var(--text);
+}
+
+h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-top: 1.5rem;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+
+p, li {
+  color: var(--text-muted);
+  margin-bottom: 1rem;
+}
+
+ul {
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.card h3 {
+  margin-top: 0;
+  color: var(--accent);
+}
+
+.keyword {
+  font-family: var(--mono);
+  font-weight: 700;
+  color: var(--text);
+  background: rgba(255, 107, 53, 0.15);
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+}
+
+footer {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+@media (max-width: 768px) {
+  main { padding: 100px 1.25rem 60px; }
+  header { padding: 0 1.25rem; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <a href="/" class="logo" aria-label="ScrappyLabs home">ScrappyLabs</a>
+</header>
+
+<main>
+  <span class="section-label">// Legal</span>
+  <h1>SMS Terms &amp; Consent</h1>
+  <p class="last-updated">Last updated: July 20, 2026</p>
+
+  <p>These terms describe the SMS text-messaging program operated by <strong>ScrappyLabs</strong>, a d/b/a (assumed business name) of <strong>Loser.com LLC</strong> ("ScrappyLabs", "we", "us", "our"). By opting in you agree to these terms. They are part of, and should be read together with, our <a href="/privacy">Privacy Policy</a>.</p>
+
+  <div class="card">
+    <h3>Program description</h3>
+    <p>ScrappyLabs sends <strong>transactional service and account notifications</strong> to its own clients — for example project and deployment status updates, build-ready alerts, appointment and callback confirmations, and account notices the client requested. This is not a marketing or promotional program; we do not send marketing texts through it.</p>
+  </div>
+
+  <h2>How you consent (opt in)</h2>
+  <p>You are added to the program only after you have explicitly opted in, in one of these ways:</p>
+  <ul>
+    <li><strong>Verbally during an onboarding phone call.</strong> Before enabling texts, a representative reads a disclosure and obtains your consent; onboarding calls are recorded. The disclosure states, verbatim: <em>"This is ScrappyLabs, the d/b/a of Loser.com LLC. If you say yes, you will get texts from ScrappyLabs (Loser.com LLC) about your projects and account: status and deployment updates, build-ready alerts, and appointment or callback confirmations. Message frequency varies, and message and data rates may apply. Reply STOP any time to opt out, or HELP for help. We do not share or sell your mobile information with anyone. Would you like to receive texts?"</em></li>
+    <li><strong>By agreeing to receive service notifications</strong> when you engage ScrappyLabs and provide your mobile number.</li>
+  </ul>
+  <p>We never use purchased or third-party contact lists. Consent to receive texts is never a condition of purchasing any product or service.</p>
+
+  <h2>Message frequency &amp; cost</h2>
+  <p>Message frequency varies based on your account activity. <strong>Message and data rates may apply</strong> — these are charged by your mobile carrier, not by ScrappyLabs.</p>
+
+  <h2>Opting out &amp; getting help</h2>
+  <ul>
+    <li>Reply <span class="keyword">STOP</span> to any message to unsubscribe. You will receive one confirmation message and then no further texts.</li>
+    <li>Reply <span class="keyword">START</span> to opt back in.</li>
+    <li>Reply <span class="keyword">HELP</span> for help, or email <a href="mailto:brian@scrappylabs.ai">brian@scrappylabs.ai</a>.</li>
+  </ul>
+
+  <div class="card">
+    <h3>We do not share or sell your mobile information</h3>
+    <p>No mobile information is shared with or sold to third parties or affiliates for their marketing or promotional purposes. <strong>Text-messaging originator opt-in data and consent are not shared with any third parties.</strong> See our <a href="/privacy">Privacy Policy</a> for full detail on how we handle your data.</p>
+  </div>
+
+  <h2>Supported carriers</h2>
+  <p>Carriers are not liable for delayed or undelivered messages.</p>
+
+  <h2>Contact</h2>
+  <p>ScrappyLabs (a d/b/a of Loser.com LLC)<br>
+  1595 Kitchens Branch Rd, Sylva, NC 28779<br>
+  <a href="mailto:brian@scrappylabs.ai">brian@scrappylabs.ai</a></p>
+</main>
+
+<footer>
+  &copy; 2026 Loser.com LLC. ScrappyLabs is a d/b/a of Loser.com LLC. | <a href="/">Home</a> · <a href="/privacy">Privacy</a> · <a href="/tos">Terms</a>
+</footer>
+
+</body>
+</html>
