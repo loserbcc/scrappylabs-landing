@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ScrappyLabs — The Log</title>
+    <link>https://scrappylabs.ai/log</link>
+    <atom:link href="https://scrappylabs.ai/feed.xml" rel="self" type="application/rss+xml"/>
+    <description>Field notes, tests, sample work and open source from ScrappyLabs.</description>
+    <language>en</language>
+    <lastBuildDate>Fri, 24 Jul 2026 02:58:29 +0000</lastBuildDate>
+    <item>
+      <title>Mage-Flow, First Light</title>
+      <link>https://scrappylabs.ai/mage-flow</link>
+      <guid isPermaLink="false">mage-flow</guid>
+      <pubDate>Thu, 23 Jul 2026 12:00:00 +0000</pubDate>
+      <description>Microsoft shipped a 4B image model that does generation and instruction editing under an MIT licence — the licence being the part that usually kills these for client work. We had it measured on our own GPU the same evening. It beat its own published speed at half the advertised memory, and it renders readable text on embroidery, blueprints and screenprints. Eighteen images, one seed, no retries — plus the attention-backend trap that cost us an hour, written down so it doesn't cost you one.</description>
+      <category>image models</category>
+      <category>benchmarks</category>
+      <category>measured on our iron</category>
+      <category>open weights</category>
+    </item>
+    <item>
+      <title>Mage-Flow — The Full Sample Set</title>
+      <link>https://stuff.scrappylabs.ai/public/moya/mage-flow-gallery.html</link>
+      <guid isPermaLink="false">mage-flow-gallery</guid>
+      <pubDate>Thu, 23 Jul 2026 12:00:00 +0000</pubDate>
+      <description>Every frame we generated while evaluating Mage-Flow: embroidered patches, cyanotype blueprints, risograph prints, a neon-noir alley, stained glass, and a three-step edit chain. One seed, first output kept, nothing cherry-picked.</description>
+      <category>sample art</category>
+      <category>image models</category>
+      <category>generated</category>
+    </item>
+    <item>
+      <title>audhd — Divergent Ideation for Coding Agents</title>
+      <link>https://github.com/scrappylabsai/audhd</link>
+      <guid isPermaLink="false">gh-audhd</guid>
+      <pubDate>Thu, 16 Jul 2026 12:00:00 +0000</pubDate>
+      <description>Open source. Spawns isolated parallel agents under distorted cognitive frames to fight premature convergence, then scores and clusters what comes back. A fork of UditAkhourii/adhd that names the systematizing-critic half. MIT.</description>
+      <category>open source</category>
+      <category>agents</category>
+      <category>ideation</category>
+    </item>
+    <item>
+      <title>watch — Give Claude the Ability to Watch Video</title>
+      <link>https://github.com/scrappylabsai/watch</link>
+      <guid isPermaLink="false">gh-watch</guid>
+      <pubDate>Sun, 12 Jul 2026 12:00:00 +0000</pubDate>
+      <description>Open source. Scene-aware frame extraction plus local-first speech recognition, so an agent can actually answer questions about a video instead of guessing from the title. Cloud transcription is opt-in, not required.</description>
+      <category>open source</category>
+      <category>video</category>
+      <category>asr</category>
+    </item>
+    <item>
+      <title>We Gave the Robots a Babysitter</title>
+      <link>https://scrappylabs.ai/babysitter</link>
+      <guid isPermaLink="false">babysitter</guid>
+      <pubDate>Fri, 10 Jul 2026 12:00:00 +0000</pubDate>
+      <description>An autonomous agent with a terminal will happily run rm&amp;nbsp;-rf if a poisoned web page tells it to. So before any of ours runs a command, a world model dry-runs it in an imagined world and flags DESTRUCTIVE before it happens. The predict-then-act gate that catches rm -rf, agentjacking, and exfil — and the honest reason “we keep it wrangled” is a mechanism, not a slogan.</description>
+      <category>world model</category>
+      <category>agent safety</category>
+      <category>predict-then-act</category>
+      <category>prompt injection</category>
+    </item>
+    <item>
+      <title>SPECVOICE — Speculative Execution at the Dialog Layer</title>
+      <link>https://scrappylabs.ai/specvoice</link>
+      <guid isPermaLink="false">specvoice</guid>
+      <pubDate>Fri, 10 Jul 2026 12:00:00 +0000</pubDate>
+      <description>Borrowing a trick from CPU design and applying it to conversation: start computing the likely answer before the caller has finished asking. What speculative execution looks like when the pipeline is a voice agent rather than a processor.</description>
+      <category>voice agents</category>
+      <category>latency</category>
+      <category>architecture</category>
+    </item>
+    <item>
+      <title>Two Years to the Taste of the Stew</title>
+      <link>https://scrappylabs.ai/two-years</link>
+      <guid isPermaLink="false">two-years</guid>
+      <pubDate>Wed, 08 Jul 2026 12:00:00 +0000</pubDate>
+      <description>The honest arc — from fighting Windows to a fleet of local models that finally feel real. The MCP tool-use moment, a memory layer a frontier model graded A&amp;minus; (and told us exactly where we're still behind), the month local inference got real, and a take on the buggy-whip crowd.</description>
+      <category>local inference</category>
+      <category>the arc</category>
+      <category>memory</category>
+    </item>
+    <item>
+      <title>Fleet Log — Thirty Days in the Open</title>
+      <link>https://stuff.scrappylabs.ai/public/blog/fleet-log.html</link>
+      <guid isPermaLink="false">fleet-log</guid>
+      <pubDate>Wed, 08 Jul 2026 12:00:00 +0000</pubDate>
+      <description>A month of building in the open, logged as it happened.</description>
+      <category>build in the open</category>
+      <category>fleet</category>
+    </item>
+    <item>
+      <title>Scrappy Tools — Teaching Small Models to Use CLI Tools</title>
+      <link>https://scrappylabs.ai/scrappy-tools</link>
+      <guid isPermaLink="false">scrappy-tools</guid>
+      <pubDate>Fri, 20 Mar 2026 12:00:00 +0000</pubDate>
+      <description>Small local models can drive real command-line tools if you teach them properly. What worked, what didn't, and why tool-use is the capability that makes a small model useful instead of merely fast.</description>
+      <category>small models</category>
+      <category>tool use</category>
+      <category>local inference</category>
+    </item>
+    <item>
+      <title>The GPU Warranty Fight</title>
+      <link>https://scrappylabs.ai/gpu-warranty</link>
+      <guid isPermaLink="false">gpu-warranty</guid>
+      <pubDate>Sat, 14 Mar 2026 12:00:00 +0000</pubDate>
+      <description>A dead card, three companies, and a two-year paper trail. What actually happens when a warranty claim goes wrong — documented in full, because everyone deserves to know before they buy.</description>
+      <category>hardware</category>
+      <category>warranty</category>
+      <category>receipts</category>
+    </item>
+    <item>
+      <title>QB Agent — An AI Bookkeeper for QuickBooks Online</title>
+      <link>https://scrappylabs.ai/qb-agent</link>
+      <guid isPermaLink="false">qb-agent</guid>
+      <pubDate>Tue, 10 Feb 2026 12:00:00 +0000</pubDate>
+      <description>Invoices, expenses, reports and purchase orders through plain English, wired directly into QuickBooks Online. No dashboards to learn and no forms to fill out — you talk to it like you'd talk to a bookkeeper.</description>
+      <category>agents</category>
+      <category>quickbooks</category>
+      <category>automation</category>
+    </item>
+    <item>
+      <title>Multilingual TTS — Live Demo</title>
+      <link>https://scrappylabs.ai/demo</link>
+      <guid isPermaLink="false">demo</guid>
+      <pubDate>Wed, 04 Feb 2026 12:00:00 +0000</pubDate>
+      <description>Our text-to-speech running live in the browser, across languages. Type something and hear it back.</description>
+      <category>tts</category>
+      <category>voice</category>
+      <category>demo</category>
+    </item>
+  </channel>
+</rss>

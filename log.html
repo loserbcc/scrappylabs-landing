@@ -111,61 +111,160 @@ footer .note{font-family:var(--mono); font-size:.72rem; letter-spacing:.06em; co
 
   <div class="divider">Latest</div>
 
+  <!-- SL:CONTENT:START -->
+  <style>
+    .sl-filter{display:flex;flex-wrap:wrap;gap:.5rem;margin:0 0 1.6rem}
+    .sl-chip{font:inherit;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;
+      background:transparent;color:var(--muted,#98a2b6);border:1px solid var(--line2,rgba(255,255,255,.16));
+      border-radius:999px;padding:.42rem .85rem;cursor:pointer;transition:.15s}
+    .sl-chip:hover{color:var(--ink,#e6ebf4);border-color:var(--amber,#ff6b35)}
+    .sl-chip[aria-pressed="true"]{background:var(--amber,#ff6b35);color:#180a03;
+      border-color:var(--amber,#ff6b35);font-weight:700}
+    .sl-chip:focus-visible{outline:3px solid var(--amber-ink,#ffb27a);outline-offset:2px}
+    .sl-media{display:flex;gap:6px;margin:.9rem 0 0;flex-wrap:wrap}
+    .sl-media img{width:78px;height:78px;object-fit:cover;border-radius:6px;
+      border:1px solid var(--line,rgba(255,255,255,.09))}
+    .post[hidden]{display:none}
+    .sl-count{font-size:.78rem;color:var(--muted,#98a2b6);margin:0 0 1.2rem}
+  </style>
+  <div class="sl-filter"><button class="sl-chip" data-filter="field-note">Field Notes</button><button class="sl-chip" data-filter="test">Test</button><button class="sl-chip" data-filter="gallery">Sample Art</button><button class="sl-chip" data-filter="demo">Demo</button><button class="sl-chip" data-filter="build">Build</button><button class="sl-chip" data-filter="release">Open Source</button><button class="sl-chip" data-filter="long-read">Long Read</button></div>
+  <p class="sl-count"></p>
+
   <div class="posts">
 
-    <a class="post" href="/mage-flow">
-      <div class="meta"><span class="kind">Field Notes</span><span>23 Jul 2026</span><span>· 4 min read</span></div>
+    <a class="post" data-type="test" href="/mage-flow">
+      <div class="meta"><span class="kind">Test</span><span>23 Jul 2026</span><span>· 4 min read</span></div>
       <h2>Mage-Flow, First Light</h2>
       <p>Microsoft shipped a 4B image model that does generation <strong>and</strong> instruction editing under an <strong>MIT licence</strong> — the licence being the part that usually kills these for client work. We had it measured on our own GPU the same evening. It beat its own published speed at <strong>half</strong> the advertised memory, and it renders readable text on embroidery, blueprints and screenprints. Eighteen images, one seed, no retries — plus the attention-backend trap that cost us an hour, written down so it doesn't cost you one.</p>
-      <div class="tags">
-        <span class="tag">image models</span>
-        <span class="tag">benchmarks</span>
-        <span class="tag">measured on our iron</span>
-        <span class="tag">open weights</span>
-      </div>
-      <div class="read" style="margin-top:1rem">Read the notes →</div>
+      <div class="sl-media" aria-hidden="true"><img src="mf-wrangled-poster.webp" alt="" loading="lazy" width="120" height="120"><img src="mf-patch.webp" alt="" loading="lazy" width="120" height="120"><img src="mf-chain3.webp" alt="" loading="lazy" width="120" height="120"></div>
+      <div class="tags"><span class="tag">image models</span><span class="tag">benchmarks</span><span class="tag">measured on our iron</span><span class="tag">open weights</span></div>
+      <div class="read" style="margin-top:1rem">Read it &rarr;</div>
     </a>
 
-    <a class="post" href="/babysitter">
+    <a class="post" data-type="gallery" href="https://stuff.scrappylabs.ai/public/moya/mage-flow-gallery.html" target="_blank" rel="noopener">
+      <div class="meta"><span class="kind">Sample Art</span><span>23 Jul 2026</span></div>
+      <h2>Mage-Flow — The Full Sample Set</h2>
+      <p>Every frame we generated while evaluating Mage-Flow: embroidered patches, cyanotype blueprints, risograph prints, a neon-noir alley, stained glass, and a three-step edit chain. One seed, first output kept, nothing cherry-picked.</p>
+      <div class="sl-media" aria-hidden="true"><img src="mf-patch.webp" alt="" loading="lazy" width="120" height="120"><img src="mf-riso.webp" alt="" loading="lazy" width="120" height="120"><img src="mf-blueprint.webp" alt="" loading="lazy" width="120" height="120"><img src="mf-noir.webp" alt="" loading="lazy" width="120" height="120"><img src="mf-stainedglass.webp" alt="" loading="lazy" width="120" height="120"><img src="mf-diorama.webp" alt="" loading="lazy" width="120" height="120"></div>
+      <div class="tags"><span class="tag">sample art</span><span class="tag">image models</span><span class="tag">generated</span></div>
+      <div class="read" style="margin-top:1rem">Open &nearr;</div>
+    </a>
+
+    <a class="post" data-type="release" href="https://github.com/scrappylabsai/audhd" target="_blank" rel="noopener">
+      <div class="meta"><span class="kind">Open Source</span><span>16 Jul 2026</span></div>
+      <h2>audhd — Divergent Ideation for Coding Agents</h2>
+      <p>Open source. Spawns isolated parallel agents under distorted cognitive frames to fight premature convergence, then scores and clusters what comes back. A fork of UditAkhourii/adhd that names the systematizing-critic half. MIT.</p>
+      
+      <div class="tags"><span class="tag">open source</span><span class="tag">agents</span><span class="tag">ideation</span></div>
+      <div class="read" style="margin-top:1rem">Open &nearr;</div>
+    </a>
+
+    <a class="post" data-type="release" href="https://github.com/scrappylabsai/watch" target="_blank" rel="noopener">
+      <div class="meta"><span class="kind">Open Source</span><span>12 Jul 2026</span></div>
+      <h2>watch — Give Claude the Ability to Watch Video</h2>
+      <p>Open source. Scene-aware frame extraction plus local-first speech recognition, so an agent can actually answer questions about a video instead of guessing from the title. Cloud transcription is opt-in, not required.</p>
+      
+      <div class="tags"><span class="tag">open source</span><span class="tag">video</span><span class="tag">asr</span></div>
+      <div class="read" style="margin-top:1rem">Open &nearr;</div>
+    </a>
+
+    <a class="post" data-type="field-note" href="/babysitter">
       <div class="meta"><span class="kind">Field Notes</span><span>10 Jul 2026</span><span>· 6 min read</span></div>
       <h2>We Gave the Robots a Babysitter</h2>
-      <p>An autonomous agent with a terminal will happily run <strong>rm&nbsp;-rf</strong> if a poisoned web page tells it to. So before any of ours runs a command, a world model dry-runs it in an imagined world and flags <strong>DESTRUCTIVE</strong> before it happens. The predict-then-act gate that catches <em>rm -rf</em>, agentjacking, and exfil — and the honest reason "we keep it wrangled" is a mechanism, not a slogan.</p>
-      <div class="tags">
-        <span class="tag">world model</span>
-        <span class="tag">agent safety</span>
-        <span class="tag">predict-then-act</span>
-        <span class="tag">prompt injection</span>
-      </div>
-      <div class="read" style="margin-top:1rem">Read the notes →</div>
+      <p>An autonomous agent with a terminal will happily run <strong>rm&nbsp;-rf</strong> if a poisoned web page tells it to. So before any of ours runs a command, a world model dry-runs it in an imagined world and flags <strong>DESTRUCTIVE</strong> before it happens. The predict-then-act gate that catches <em>rm -rf</em>, agentjacking, and exfil — and the honest reason “we keep it wrangled” is a mechanism, not a slogan.</p>
+      
+      <div class="tags"><span class="tag">world model</span><span class="tag">agent safety</span><span class="tag">predict-then-act</span><span class="tag">prompt injection</span></div>
+      <div class="read" style="margin-top:1rem">Read it &rarr;</div>
     </a>
 
-    <a class="post" href="/two-years">
+    <a class="post" data-type="field-note" href="/specvoice">
+      <div class="meta"><span class="kind">Field Notes</span><span>10 Jul 2026</span><span>· 5 min read</span></div>
+      <h2>SPECVOICE — Speculative Execution at the Dialog Layer</h2>
+      <p>Borrowing a trick from CPU design and applying it to conversation: start computing the likely answer before the caller has finished asking. What speculative execution looks like when the pipeline is a voice agent rather than a processor.</p>
+      
+      <div class="tags"><span class="tag">voice agents</span><span class="tag">latency</span><span class="tag">architecture</span></div>
+      <div class="read" style="margin-top:1rem">Read it &rarr;</div>
+    </a>
+
+    <a class="post" data-type="long-read" href="/two-years">
       <div class="meta"><span class="kind">Long Read</span><span>08 Jul 2026</span><span>· 9 min read</span></div>
       <h2>Two Years to the Taste of the Stew</h2>
       <p>The honest arc — from fighting Windows to a fleet of local models that finally feel real. The MCP tool-use moment, a memory layer a frontier model graded <strong>A&minus;</strong> (and told us exactly where we're still behind), the month local inference got real, and a take on the buggy-whip crowd.</p>
-      <div class="tags">
-        <span class="tag">evolution</span>
-        <span class="tag">memory layer</span>
-        <span class="tag">local models</span>
-        <span class="tag">opinion</span>
-      </div>
-      <div class="read" style="margin-top:1rem">Read the essay →</div>
+      
+      <div class="tags"><span class="tag">local inference</span><span class="tag">the arc</span><span class="tag">memory</span></div>
+      <div class="read" style="margin-top:1rem">Read it &rarr;</div>
     </a>
 
-    <a class="post" href="https://stuff.scrappylabs.ai/public/blog/fleet-log.html">
-      <div class="meta"><span class="kind">Field Log</span><span>08 Jul 2026</span><span>· 4 min read</span></div>
+    <a class="post" data-type="field-note" href="https://stuff.scrappylabs.ai/public/blog/fleet-log.html" target="_blank" rel="noopener">
+      <div class="meta"><span class="kind">Field Notes</span><span>08 Jul 2026</span><span>· 4 min read</span></div>
       <h2>Fleet Log — Thirty Days in the Open</h2>
-      <p>One builder, one fleet, thirty days — read back from the fleet's own memory. What shipped, what broke and got written down, and what the machines learned to do while nobody was watching. A field log, not a plan.</p>
-      <div class="tags">
-        <span class="tag">local AI fleet</span>
-        <span class="tag">voice agents</span>
-        <span class="tag">self-healing memory</span>
-        <span class="tag">retrospective</span>
-      </div>
-      <div class="read" style="margin-top:1rem">Read the log →</div>
+      <p>A month of building in the open, logged as it happened.</p>
+      
+      <div class="tags"><span class="tag">build in the open</span><span class="tag">fleet</span></div>
+      <div class="read" style="margin-top:1rem">Open &nearr;</div>
     </a>
 
+    <a class="post" data-type="field-note" href="/scrappy-tools">
+      <div class="meta"><span class="kind">Field Notes</span><span>20 Mar 2026</span><span>· 5 min read</span></div>
+      <h2>Scrappy Tools — Teaching Small Models to Use CLI Tools</h2>
+      <p>Small local models can drive real command-line tools if you teach them properly. What worked, what didn't, and why tool-use is the capability that makes a small model useful instead of merely fast.</p>
+      
+      <div class="tags"><span class="tag">small models</span><span class="tag">tool use</span><span class="tag">local inference</span></div>
+      <div class="read" style="margin-top:1rem">Read it &rarr;</div>
+    </a>
+
+    <a class="post" data-type="field-note" href="/gpu-warranty">
+      <div class="meta"><span class="kind">Field Notes</span><span>14 Mar 2026</span><span>· 7 min read</span></div>
+      <h2>The GPU Warranty Fight</h2>
+      <p>A dead card, three companies, and a two-year paper trail. What actually happens when a warranty claim goes wrong — documented in full, because everyone deserves to know before they buy.</p>
+      
+      <div class="tags"><span class="tag">hardware</span><span class="tag">warranty</span><span class="tag">receipts</span></div>
+      <div class="read" style="margin-top:1rem">Read it &rarr;</div>
+    </a>
+
+    <a class="post" data-type="build" href="/qb-agent">
+      <div class="meta"><span class="kind">Build</span><span>10 Feb 2026</span><span>· 3 min read</span></div>
+      <h2>QB Agent — An AI Bookkeeper for QuickBooks Online</h2>
+      <p>Invoices, expenses, reports and purchase orders through plain English, wired directly into QuickBooks Online. No dashboards to learn and no forms to fill out — you talk to it like you'd talk to a bookkeeper.</p>
+      
+      <div class="tags"><span class="tag">agents</span><span class="tag">quickbooks</span><span class="tag">automation</span></div>
+      <div class="read" style="margin-top:1rem">Read it &rarr;</div>
+    </a>
+
+    <a class="post" data-type="demo" href="/demo">
+      <div class="meta"><span class="kind">Demo</span><span>04 Feb 2026</span><span>· 1 min read</span></div>
+      <h2>Multilingual TTS — Live Demo</h2>
+      <p>Our text-to-speech running live in the browser, across languages. Type something and hear it back.</p>
+      
+      <div class="tags"><span class="tag">tts</span><span class="tag">voice</span><span class="tag">demo</span></div>
+      <div class="read" style="margin-top:1rem">Read it &rarr;</div>
+    </a>
   </div>
+  <script>
+  (function(){
+    var chips=[].slice.call(document.querySelectorAll('.sl-chip')),
+        posts=[].slice.call(document.querySelectorAll('.posts .post')),
+        count=document.querySelector('.sl-count'), active=null;
+    function apply(){
+      var n=0;
+      posts.forEach(function(p){
+        var show=!active||p.dataset.type===active;
+        p.hidden=!show; if(show)n++;
+      });
+      chips.forEach(function(c){c.setAttribute('aria-pressed', c.dataset.filter===active);});
+      if(count)count.textContent=n+(n===1?' item':' items')+(active?' · filtered':'');
+    }
+    chips.forEach(function(c){
+      c.setAttribute('aria-pressed','false');
+      c.addEventListener('click',function(){
+        active = active===c.dataset.filter ? null : c.dataset.filter; apply();
+      });
+    });
+    apply();
+  })();
+  </script>
+  <!-- SL:CONTENT:END -->
+
 
   <div class="divider" style="margin-top:clamp(2.6rem,6vw,3.6rem)">Dispatches</div>
   <ul style="list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:1rem;">

@@ -1,0 +1,216 @@
+{
+  "_comment": "Single source of truth for The Log — field notes, tests we ran, sample art, video, demos, builds and open-source releases. Managed by `sl-content`; do not hand-edit the generated HTML. Every entry needs public:true or the build refuses to publish it.",
+  "site": "https://scrappylabs.ai",
+  "entries": [
+    {
+      "slug": "mage-flow",
+      "type": "test",
+      "date": "2026-07-23",
+      "title": "Mage-Flow, First Light",
+      "summary": "Microsoft shipped a 4B image model that does generation <strong>and</strong> instruction editing under an <strong>MIT licence</strong> — the licence being the part that usually kills these for client work. We had it measured on our own GPU the same evening. It beat its own published speed at <strong>half</strong> the advertised memory, and it renders readable text on embroidery, blueprints and screenprints. Eighteen images, one seed, no retries — plus the attention-backend trap that cost us an hour, written down so it doesn't cost you one.",
+      "url": "/mage-flow",
+      "tags": [
+        "image models",
+        "benchmarks",
+        "measured on our iron",
+        "open weights"
+      ],
+      "readMins": 4,
+      "image": "mf-hero-wrangler.webp",
+      "featured": true,
+      "public": true,
+      "media": [
+        "mf-wrangled-poster.webp",
+        "mf-patch.webp",
+        "mf-chain3.webp"
+      ]
+    },
+    {
+      "slug": "mage-flow-gallery",
+      "type": "gallery",
+      "date": "2026-07-23",
+      "title": "Mage-Flow — The Full Sample Set",
+      "summary": "Every frame we generated while evaluating Mage-Flow: embroidered patches, cyanotype blueprints, risograph prints, a neon-noir alley, stained glass, and a three-step edit chain. One seed, first output kept, nothing cherry-picked.",
+      "url": "https://stuff.scrappylabs.ai/public/moya/mage-flow-gallery.html",
+      "external": true,
+      "tags": [
+        "sample art",
+        "image models",
+        "generated"
+      ],
+      "image": "mf-patch.webp",
+      "media": [
+        "mf-patch.webp",
+        "mf-riso.webp",
+        "mf-blueprint.webp",
+        "mf-noir.webp",
+        "mf-stainedglass.webp",
+        "mf-diorama.webp"
+      ],
+      "public": true
+    },
+    {
+      "slug": "babysitter",
+      "type": "field-note",
+      "date": "2026-07-10",
+      "title": "We Gave the Robots a Babysitter",
+      "summary": "An autonomous agent with a terminal will happily run <strong>rm&nbsp;-rf</strong> if a poisoned web page tells it to. So before any of ours runs a command, a world model dry-runs it in an imagined world and flags <strong>DESTRUCTIVE</strong> before it happens. The predict-then-act gate that catches <em>rm -rf</em>, agentjacking, and exfil — and the honest reason “we keep it wrangled” is a mechanism, not a slogan.",
+      "url": "/babysitter",
+      "tags": [
+        "world model",
+        "agent safety",
+        "predict-then-act",
+        "prompt injection"
+      ],
+      "readMins": 6,
+      "featured": true,
+      "public": true
+    },
+    {
+      "slug": "specvoice",
+      "type": "field-note",
+      "date": "2026-07-10",
+      "title": "SPECVOICE — Speculative Execution at the Dialog Layer",
+      "summary": "Borrowing a trick from CPU design and applying it to conversation: start computing the likely answer before the caller has finished asking. What speculative execution looks like when the pipeline is a voice agent rather than a processor.",
+      "url": "/specvoice",
+      "tags": [
+        "voice agents",
+        "latency",
+        "architecture"
+      ],
+      "readMins": 5,
+      "public": true
+    },
+    {
+      "slug": "two-years",
+      "type": "long-read",
+      "date": "2026-07-08",
+      "title": "Two Years to the Taste of the Stew",
+      "summary": "The honest arc — from fighting Windows to a fleet of local models that finally feel real. The MCP tool-use moment, a memory layer a frontier model graded <strong>A&minus;</strong> (and told us exactly where we're still behind), the month local inference got real, and a take on the buggy-whip crowd.",
+      "url": "/two-years",
+      "tags": [
+        "local inference",
+        "the arc",
+        "memory"
+      ],
+      "readMins": 9,
+      "public": true
+    },
+    {
+      "slug": "fleet-log",
+      "type": "field-note",
+      "date": "2026-07-08",
+      "title": "Fleet Log — Thirty Days in the Open",
+      "summary": "A month of building in the open, logged as it happened.",
+      "url": "https://stuff.scrappylabs.ai/public/blog/fleet-log.html",
+      "external": true,
+      "tags": [
+        "build in the open",
+        "fleet"
+      ],
+      "readMins": 4,
+      "public": true
+    },
+    {
+      "slug": "scrappy-tools",
+      "type": "field-note",
+      "date": "2026-03-20",
+      "title": "Scrappy Tools — Teaching Small Models to Use CLI Tools",
+      "summary": "Small local models can drive real command-line tools if you teach them properly. What worked, what didn't, and why tool-use is the capability that makes a small model useful instead of merely fast.",
+      "url": "/scrappy-tools",
+      "tags": [
+        "small models",
+        "tool use",
+        "local inference"
+      ],
+      "readMins": 5,
+      "public": true
+    },
+    {
+      "slug": "gpu-warranty",
+      "type": "field-note",
+      "date": "2026-03-14",
+      "title": "The GPU Warranty Fight",
+      "summary": "A dead card, three companies, and a two-year paper trail. What actually happens when a warranty claim goes wrong — documented in full, because everyone deserves to know before they buy.",
+      "url": "/gpu-warranty",
+      "tags": [
+        "hardware",
+        "warranty",
+        "receipts"
+      ],
+      "readMins": 7,
+      "public": true
+    },
+    {
+      "slug": "qb-agent",
+      "type": "build",
+      "date": "2026-02-10",
+      "title": "QB Agent — An AI Bookkeeper for QuickBooks Online",
+      "summary": "Invoices, expenses, reports and purchase orders through plain English, wired directly into QuickBooks Online. No dashboards to learn and no forms to fill out — you talk to it like you'd talk to a bookkeeper.",
+      "url": "/qb-agent",
+      "tags": [
+        "agents",
+        "quickbooks",
+        "automation"
+      ],
+      "readMins": 3,
+      "public": true
+    },
+    {
+      "slug": "demo",
+      "type": "demo",
+      "date": "2026-02-04",
+      "title": "Multilingual TTS — Live Demo",
+      "summary": "Our text-to-speech running live in the browser, across languages. Type something and hear it back.",
+      "url": "/demo",
+      "tags": [
+        "tts",
+        "voice",
+        "demo"
+      ],
+      "readMins": 1,
+      "public": true
+    },
+    {
+      "slug": "gh-audhd",
+      "type": "release",
+      "date": "2026-07-16",
+      "title": "audhd — Divergent Ideation for Coding Agents",
+      "summary": "Open source. Spawns isolated parallel agents under distorted cognitive frames to fight premature convergence, then scores and clusters what comes back. A fork of UditAkhourii/adhd that names the systematizing-critic half. MIT.",
+      "url": "https://github.com/scrappylabsai/audhd",
+      "external": true,
+      "tags": [
+        "open source",
+        "agents",
+        "ideation"
+      ],
+      "public": true
+    },
+    {
+      "slug": "gh-watch",
+      "type": "release",
+      "date": "2026-07-12",
+      "title": "watch — Give Claude the Ability to Watch Video",
+      "summary": "Open source. Scene-aware frame extraction plus local-first speech recognition, so an agent can actually answer questions about a video instead of guessing from the title. Cloud transcription is opt-in, not required.",
+      "url": "https://github.com/scrappylabsai/watch",
+      "external": true,
+      "tags": [
+        "open source",
+        "video",
+        "asr"
+      ],
+      "public": true
+    }
+  ],
+  "types": {
+    "field-note": "Field Notes",
+    "test": "Test",
+    "gallery": "Sample Art",
+    "video": "Video",
+    "demo": "Demo",
+    "build": "Build",
+    "release": "Open Source",
+    "long-read": "Long Read",
+    "press": "Press"
+  }
+}
